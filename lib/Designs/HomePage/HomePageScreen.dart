@@ -1,5 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/HomePageScreens/Categories/CategoriesScreen.dart';
 import 'package:dentalstation_app/Designs/HomePageScreens/MainScreen/MainScreen.dart';
 import 'package:dentalstation_app/Designs/HomePageScreens/MyAccount/MyAccount.dart';
