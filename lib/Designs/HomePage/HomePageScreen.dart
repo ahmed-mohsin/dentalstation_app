@@ -9,6 +9,7 @@ import 'package:dentalstation_app/Designs/NavBar/NavigationBar.dart';
 import 'package:dentalstation_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:line_icons/line_icons.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -39,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage>
   CurvedAnimation curve;
 
   final iconList = <IconData>[
-    Icons.home,
+    LineIcons.home,
     Icons.format_list_bulleted_sharp,
     Icons.local_offer,
     Icons.account_circle_outlined,
@@ -101,10 +102,10 @@ class _MyHomePageState extends State<MyHomePage>
           actions: [
             Stack(
               children: [
-                IconButton(icon: Icon(Icons.shopping_cart), onPressed: () {}),
+                IconButton(icon: Icon(LineIcons.shoppingCart), onPressed: () {}),
                 Container(
                     decoration: BoxDecoration(
-                        color: Colors.pink, shape: BoxShape.circle),
+                        color: xx , shape: BoxShape.circle),
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Text('3',style: TextStyle(color: Colors.white,fontSize: 10),),
@@ -116,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage>
             "DentalStation",
             style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: Colors.teal,
+          backgroundColor: darkTeal,
         ),
         body: NavigationScreen(
           homePageWidgets[_bottomNavIndex],

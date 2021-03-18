@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 //usage example
-//systemNavigationBarColor: HexColor('#373A36'),
+//systemNavigationBarColor: HexColor('#E03757'),
 class HexColor extends Color {
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 
@@ -12,3 +12,6 @@ class HexColor extends Color {
     return int.parse(hexColor, radix: 16);
   }
 }
+Color xx = HexColor('#E03757');
+//#1C5983
+Color darkTeal = HexColor('#1C5983');
