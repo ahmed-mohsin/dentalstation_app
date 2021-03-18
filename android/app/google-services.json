@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "218796122202",
+    "project_id": "dentalstation",
+    "storage_bucket": "dentalstation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218796122202:android:919f97d8a5be8a5b7eb863",
+        "android_client_info": {
+          "package_name": "amo.itcorner.dentalstation_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218796122202-v9qb559gtj5qktbnv1h75r2p3pq7lole.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRa3l22qAAjNzqwbLqOg8ky9CVPhEMuxQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218796122202-v9qb559gtj5qktbnv1h75r2p3pq7lole.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
