@@ -46,9 +46,6 @@ class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   final autoSizeGroup = AutoSizeGroup();
   var _bottomNavIndex = 0; //default index of first screen
-  final storage = FlutterSecureStorage();
-
-  String cartKey = 'cartKey';
 
   AnimationController _animationController;
   Animation<double> animation;
@@ -64,28 +61,40 @@ class _MyHomePageState extends State<MyHomePage>
     'MainScreen',
     'Categories',
     'Offers',
+    'Cart'
     'MyAccount',
   ];
   final homePageWidgets = <Widget>[
     MainScreen(),
     Categories(),
     Offers(),
+    Consumer(
+      builder: (cx, watch, v) {
+        return Badge(
+          child: IconButton(
+              icon: Icon(LineIcons.shoppingCart),
+              onPressed: () {
+
+              }),
+          position: BadgePosition(top: 0, end: 1),
+          animationDuration: (Duration(milliseconds: 500)),
+          animationType: BadgeAnimationType.scale,
+          showBadge: true,
+          badgeContent: Text(
+            '${watch(cartListProvider.state).length}',
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          badgeColor: Colors.pink,
+        );
+      },
+    ),
     MyAccount(),
   ];
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      String cartSave = await storage.read(key: cartKey);
-      print('try loading cart data ');
-      if (cartSave != null && cartSave.isEmpty) {
-        final listCart = json.decode(cartSave) as List<dynamic>;
-        final listCartParsed = listCart.map((e) => Cart.fromJson(e)).toList();
-        if (listCartParsed != null && listCartParsed.length > 0)
-          context.read(cartListProvider).state = listCartParsed;
-      }
-    });
 
     final systemTheme = SystemUiOverlayStyle.light.copyWith(
       systemNavigationBarColor: HexColor('#373A36'),
@@ -126,41 +135,34 @@ class _MyHomePageState extends State<MyHomePage>
           leading: Container(),
           centerTitle: true,
           actions: [
-            Stack(
-              children: [
-                IconButton(
-                    icon: Icon(LineIcons.shoppingCart),
-                    onPressed: () {
-                      //CartPage
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => CartPage()),
-                      );
-                    }),
-                Container(
-                    decoration:
-                        BoxDecoration(color: xx, shape: BoxShape.circle),
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Consumer(
-                        builder: (cx, watch, v) {
-                          return Badge(
-                            position: BadgePosition(top: 0, end: 1),
-                            animationDuration: (Duration(milliseconds: 500)),
-                            animationType: BadgeAnimationType.scale,
-                            showBadge: true,
-                            badgeContent: Text(
-                              '${watch(cartListProvider.state).length}',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            badgeColor: Colors.pink,
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Consumer(
+                builder: (cx, watch, v) {
+                  return Badge(
+                    child: IconButton(
+                        icon: Icon(LineIcons.shoppingCart),
+                        onPressed: () {
+                          //CartPage
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CartPage()),
                           );
-                        },
-                      ),
-                    ))
-              ],
+                        }),
+                    position: BadgePosition(top: 0, end: 1),
+                    animationDuration: (Duration(milliseconds: 500)),
+                    animationType: BadgeAnimationType.scale,
+                    showBadge: true,
+                    badgeContent: Text(
+                      '${watch(cartListProvider.state).length}',
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                    badgeColor: Colors.pink,
+                  );
+                },
+              ),
             )
           ],
           title: Text(

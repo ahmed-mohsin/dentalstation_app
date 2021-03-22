@@ -1,5 +1,5 @@
 import 'package:dentalstation_app/Models/ProductModel.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Cart extends Product {
   int itemQuantity;

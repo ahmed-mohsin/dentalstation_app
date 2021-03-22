@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:dentalstation_app/State/stateManger.dart';
+import 'package:dentalstation_app/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_elegant_number_button/flutter_elegant_number_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -33,10 +37,20 @@ class _CartPageState extends State<CartPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(items[i].itemQuantity.toString()),
-                              ),
+                              ElegantNumberButton(
+                                  initialValue: items[i].itemQuantity,
+                                  minValue: 0,
+                                  maxValue: 100,
+                                  onChanged: (val)async{
+                                    items[i].itemQuantity = val ;
+                                    var s = json.encode(items);
+                                    print(s);
+                                    await storage.write(key: cartKey, value: json.encode(items));
+                                    setState(() {
+
+                                    });
+                                  },
+                                  decimalPlaces: 0),
                               Text(items[i].name),
                               Spacer(),
                               Text(items[i].price.toString()),
@@ -74,7 +88,7 @@ class _CartPageState extends State<CartPage> {
                   Text('Shipping coast'),
                   Spacer(),
                   Text(
-                    '${context.read(cartListProvider).sumCart()+35}',
+                    '${context.read(cartListProvider).sumCart() + 35}',
                     style: TextStyle(
                         color: Colors.black54, fontWeight: FontWeight.bold),
                   ),

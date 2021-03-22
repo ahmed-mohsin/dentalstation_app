@@ -10,8 +10,8 @@
     "url": "https://images.dentalkart.com/media/catalog/product/n/s/nsk_s-max1.jpg",
     "category": "Equipments",
     "title": "Optic handpiece",
-    "price": 550,
-    "oldPrice": 300
+    "price": 20,
+    "oldPrice": 30
   },
   {
     "id": "2",
@@ -20,8 +20,8 @@
     "url": "https://images.dentalkart.com/media/catalog/product/u/p/up.jpg",
     "category": "Equipments",
     "title": "LED polymerization light",
-    "price": 15442,
-    "oldPrice": 10000
+    "price": 100,
+    "oldPrice": 150
   },
   {
     "id": "3",
@@ -30,8 +30,8 @@
     "url": "https://images.dentalkart.com/media/catalog/product/a/p/appairotor.jpg",
     "category": "Equipments",
     "title": "Straight Handpiece",
-    "price": 500,
-    "oldPrice": 300
+    "price": 50,
+    "oldPrice": 60
   },
   {
     "id": "4",
@@ -41,6 +41,6 @@
     "category": "category 4",
     "title": "Contra Angle Handpiece",
     "price": 200,
-    "oldPrice": 256
+    "oldPrice": 250
   }
 ]
