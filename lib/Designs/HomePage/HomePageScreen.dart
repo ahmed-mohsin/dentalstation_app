@@ -1,14 +1,17 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:badges/badges.dart';
+import 'package:dentalstation_app/Designs/Cart/CartPage.dart';
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/HomePageScreens/Categories/CategoriesScreen.dart';
 import 'package:dentalstation_app/Designs/HomePageScreens/MainScreen/MainScreen.dart';
 import 'package:dentalstation_app/Designs/HomePageScreens/MyAccount/MyAccount.dart';
 import 'package:dentalstation_app/Designs/HomePageScreens/Offers/OffersScreen.dart';
 import 'package:dentalstation_app/Designs/NavBar/NavigationBar.dart';
-import 'package:dentalstation_app/main.dart';
+import 'package:dentalstation_app/State/stateManger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 
 class HomePage extends StatelessWidget {
@@ -61,6 +64,7 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   void initState() {
     super.initState();
+
     final systemTheme = SystemUiOverlayStyle.light.copyWith(
       systemNavigationBarColor: HexColor('#373A36'),
       systemNavigationBarIconBrightness: Brightness.light,
@@ -74,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage>
     curve = CurvedAnimation(
       parent: _animationController,
       curve: Interval(
-        0.8,
+        0.4,
         1.0,
         curve: Curves.easeIn,
       ),
@@ -86,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage>
 
     Future.delayed(
       Duration(seconds: 1),
-          () => _animationController.forward(),
+      () => _animationController.forward(),
     );
   }
 
@@ -102,13 +106,36 @@ class _MyHomePageState extends State<MyHomePage>
           actions: [
             Stack(
               children: [
-                IconButton(icon: Icon(LineIcons.shoppingCart), onPressed: () {}),
+                IconButton(
+                    icon: Icon(LineIcons.shoppingCart), onPressed: () {
+                      //CartPage
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CartPage()),
+                  );
+                }),
                 Container(
-                    decoration: BoxDecoration(
-                        color: xx , shape: BoxShape.circle),
+                    decoration:
+                        BoxDecoration(color: xx, shape: BoxShape.circle),
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Text('3',style: TextStyle(color: Colors.white,fontSize: 10),),
+                      child: Consumer(
+                        builder: (cx, watch, v) {
+                          return Badge(
+                            position: BadgePosition(top: 0, end: 1),
+                            animationDuration: (Duration(milliseconds: 500)),
+                            animationType: BadgeAnimationType.scale,
+                            showBadge: true,
+                            badgeContent: Text(
+                              '${watch(cartListProvider.state).length}',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            badgeColor: Colors.pink,
+                          );
+                        },
+                      ),
                     ))
               ],
             )
