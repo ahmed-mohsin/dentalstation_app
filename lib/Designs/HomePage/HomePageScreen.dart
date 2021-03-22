@@ -10,12 +10,10 @@ import 'package:dentalstation_app/Designs/HomePageScreens/MainScreen/MainScreen.
 import 'package:dentalstation_app/Designs/HomePageScreens/MyAccount/MyAccount.dart';
 import 'package:dentalstation_app/Designs/HomePageScreens/Offers/OffersScreen.dart';
 import 'package:dentalstation_app/Designs/NavBar/NavigationBar.dart';
-import 'package:dentalstation_app/Models/Cart.dart';
 import 'package:dentalstation_app/State/stateManger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:line_icons/line_icons.dart';
 
 class HomePage extends StatefulWidget {
@@ -61,41 +59,18 @@ class _MyHomePageState extends State<MyHomePage>
     'MainScreen',
     'Categories',
     'Offers',
-    'Cart'
     'MyAccount',
   ];
   final homePageWidgets = <Widget>[
     MainScreen(),
     Categories(),
     Offers(),
-    Consumer(
-      builder: (cx, watch, v) {
-        return Badge(
-          child: IconButton(
-              icon: Icon(LineIcons.shoppingCart),
-              onPressed: () {
-
-              }),
-          position: BadgePosition(top: 0, end: 1),
-          animationDuration: (Duration(milliseconds: 500)),
-          animationType: BadgeAnimationType.scale,
-          showBadge: true,
-          badgeContent: Text(
-            '${watch(cartListProvider.state).length}',
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          badgeColor: Colors.pink,
-        );
-      },
-    ),
     MyAccount(),
   ];
 
   @override
   void initState() {
     super.initState();
-
     final systemTheme = SystemUiOverlayStyle.light.copyWith(
       systemNavigationBarColor: HexColor('#373A36'),
       systemNavigationBarIconBrightness: Brightness.light,
@@ -135,38 +110,40 @@ class _MyHomePageState extends State<MyHomePage>
           leading: Container(),
           centerTitle: true,
           actions: [
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Consumer(
-                builder: (cx, watch, v) {
-                  return Badge(
-                    child: IconButton(
-                        icon: Icon(LineIcons.shoppingCart),
-                        onPressed: () {
-                          //CartPage
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CartPage()),
-                          );
-                        }),
-                    position: BadgePosition(top: 0, end: 1),
-                    animationDuration: (Duration(milliseconds: 500)),
-                    animationType: BadgeAnimationType.scale,
-                    showBadge: true,
-                    badgeContent: Text(
-                      '${watch(cartListProvider.state).length}',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                    badgeColor: Colors.pink,
-                  );
-                },
-              ),
-            )
+            Container(
+                //decoration: BoxDecoration(color: xx, shape: BoxShape.circle),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Consumer(
+                    builder: (cx, watch, v) {
+                      return Badge(
+                        child: IconButton(
+                            icon: Icon(LineIcons.shoppingCart),
+                            onPressed: () {
+                              //CartPage
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CartPage()),
+                              );
+                            }),
+                        position: BadgePosition(top: 0, end: 1),
+                        animationDuration: (Duration(milliseconds: 500)),
+                        animationType: BadgeAnimationType.scale,
+                        showBadge: true,
+                        badgeContent: Text(
+                          '${watch(cartListProvider.state).length}',
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                        badgeColor: Colors.pink,
+                      );
+                    },
+                  ),
+                ))
           ],
           title: Text(
-            "DentalStation",
+            "Dental Station",
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: darkTeal,

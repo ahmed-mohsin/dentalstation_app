@@ -91,7 +91,7 @@ class CartCard extends StatelessWidget {
                 child: Column(
                   children: [
                     Image.network(
-                      productList[index]['url'],
+                      productList[index]['image'],
                       height: 75,
                       width: 100,
                       fit: BoxFit.fill,
