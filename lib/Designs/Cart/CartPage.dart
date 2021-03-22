@@ -30,7 +30,8 @@ class _CartPageState extends State<CartPage> {
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
-                          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -38,21 +39,45 @@ class _CartPageState extends State<CartPage> {
                               ),
                               Text(items[i].name),
                               Spacer(),
-
                               Text(items[i].price.toString()),
                             ],
                           ),
-
                         ],
                       ),
                     );
                   }),
-
               Divider(),
               Row(
                 children: [
-                  Text('price'),
-                  Text('price'),
+                  Text('Sub Total'),
+                  Spacer(),
+                  Text(
+                    '${context.read(cartListProvider).sumCart()}',
+                    style: TextStyle(
+                        color: Colors.black54, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text('Shipping coast'),
+                  Spacer(),
+                  Text(
+                    '35',
+                    style: TextStyle(
+                        color: Colors.black54, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text('Shipping coast'),
+                  Spacer(),
+                  Text(
+                    '${context.read(cartListProvider).sumCart()+35}',
+                    style: TextStyle(
+                        color: Colors.black54, fontWeight: FontWeight.bold),
+                  ),
                 ],
               )
             ],

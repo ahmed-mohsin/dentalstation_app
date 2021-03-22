@@ -21,15 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async{
-      String cartSave = await  storage.read(key: cartKey);
-      if(cartSave != null && cartSave.isEmpty){
-        final listCart = json.decode(cartSave) as List <dynamic>;
-        final listCartParsed = listCart.map((e) => Cart.fromJson(e)).toList() ;
-        if(listCartParsed !=null && listCartParsed.length>0)
-          context.read(cartListProvider).state =listCartParsed ;
-      }
-    });
+
   }
 
   @override

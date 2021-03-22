@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:badges/badges.dart';
@@ -8,13 +10,20 @@ import 'package:dentalstation_app/Designs/HomePageScreens/MainScreen/MainScreen.
 import 'package:dentalstation_app/Designs/HomePageScreens/MyAccount/MyAccount.dart';
 import 'package:dentalstation_app/Designs/HomePageScreens/Offers/OffersScreen.dart';
 import 'package:dentalstation_app/Designs/NavBar/NavigationBar.dart';
+import 'package:dentalstation_app/Models/Cart.dart';
 import 'package:dentalstation_app/State/stateManger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:line_icons/line_icons.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +46,9 @@ class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   final autoSizeGroup = AutoSizeGroup();
   var _bottomNavIndex = 0; //default index of first screen
+  final storage = FlutterSecureStorage();
+
+  String cartKey = 'cartKey';
 
   AnimationController _animationController;
   Animation<double> animation;
@@ -64,6 +76,16 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      String cartSave = await storage.read(key: cartKey);
+      print('try loading cart data ');
+      if (cartSave != null && cartSave.isEmpty) {
+        final listCart = json.decode(cartSave) as List<dynamic>;
+        final listCartParsed = listCart.map((e) => Cart.fromJson(e)).toList();
+        if (listCartParsed != null && listCartParsed.length > 0)
+          context.read(cartListProvider).state = listCartParsed;
+      }
+    });
 
     final systemTheme = SystemUiOverlayStyle.light.copyWith(
       systemNavigationBarColor: HexColor('#373A36'),
@@ -107,13 +129,14 @@ class _MyHomePageState extends State<MyHomePage>
             Stack(
               children: [
                 IconButton(
-                    icon: Icon(LineIcons.shoppingCart), onPressed: () {
+                    icon: Icon(LineIcons.shoppingCart),
+                    onPressed: () {
                       //CartPage
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CartPage()),
-                  );
-                }),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CartPage()),
+                      );
+                    }),
                 Container(
                     decoration:
                         BoxDecoration(color: xx, shape: BoxShape.circle),
