@@ -51,7 +51,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           Container(
-            height: 300,
+            height: MediaQuery.of(context).size.height*.3,
             width: MediaQuery.of(context).size.width,
             child: ListView.builder(
               shrinkWrap: true,
@@ -83,7 +83,7 @@ class CartCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          width: 200,
+          width: MediaQuery.of(context).size.width*.4,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -92,10 +92,11 @@ class CartCard extends StatelessWidget {
                   children: [
                     Image.network(
                       productList[index]['image'],
-                      height: 75,
-                      width: 100,
+                      height: MediaQuery.of(context).size.height*.2 - 50,
+                      width: MediaQuery.of(context).size.width*.3,
                       fit: BoxFit.fill,
                     ),
+                    Container(height: 10,),
                     Container(
                       width: MediaQuery.of(context).size.width,
                       child: Text(
@@ -197,27 +198,3 @@ class CartCard extends StatelessWidget {
     return found;
   }
 }
-
-/*new GridTile(
-                  footer: new Text(
-                    productList[index]['title'],
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  child: SizedBox(
-                      height: 30,width: 30,
-                      child: Padding(
-                        padding: const EdgeInsets.all(30.0),
-                        child: new Image.network(
-                          productList[index]['url'],
-                          height: 30,
-                          //fit: BoxFit.fitHeight,
-                        ),
-                      )),
-                  header: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      productList[index]['name'],
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ), //just for testing, will fill with image later
-                )*/
