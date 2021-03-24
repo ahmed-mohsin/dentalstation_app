@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dentalstation_app/Models/Cart.dart';
 import 'package:dentalstation_app/State/stateManger.dart';
 import 'package:dentalstation_app/constants/constants.dart';
@@ -18,7 +19,7 @@ class itemCard extends StatelessWidget {
     final storage = FlutterSecureStorage();
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(4.0),
       child: Container(
         height: 315,
         decoration: BoxDecoration(
@@ -27,7 +28,7 @@ class itemCard extends StatelessWidget {
             border: Border.all(
               color: Colors.grey[300],
             )),
-        width: MediaQuery.of(context).size.width * .4,
+        width: MediaQuery.of(context).size.width * .45,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -35,8 +36,10 @@ class itemCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
-                  child: Image.network(
-                    productList[index]['image'],
+                  child: CachedNetworkImage(
+                    imageUrl:productList[index]['image'],
+                    //placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
                     height: 165,
                     width: MediaQuery.of(context).size.width * .3,
                     fit: BoxFit.fill,
@@ -44,10 +47,10 @@ class itemCard extends StatelessWidget {
                 ),
                 Container(
                   decoration: BoxDecoration(color: Colors.redAccent),
-                  width: 64,
-                  height: 24,
+                  width: 60,
+                  //height: 24,
                   child: Padding(
-                    padding: const EdgeInsets.all(4),
+                    padding: const EdgeInsets.only(left: 2,right: 2),
                     child: Text(
                       '${(productList[index]['price']/productList[index]['oldPrice']*100).round()}% OFF',
                       style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontSize: 14),

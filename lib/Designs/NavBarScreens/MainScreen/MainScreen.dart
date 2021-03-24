@@ -58,7 +58,7 @@ class _MainScreenState extends State<MainScreen> {
             width: MediaQuery.of(context).size.width,
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: 4,
+              itemCount: productList.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return itemCard(index);
