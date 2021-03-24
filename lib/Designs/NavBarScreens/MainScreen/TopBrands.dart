@@ -10,10 +10,10 @@ class TopBrand extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 130,
-      child: ListView.builder(
+      child: ListView.builder(physics: BouncingScrollPhysics(),
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          itemCount: catList.length,
+          itemCount: brandList.length,
           itemBuilder: (c, index) {
             return Padding(
               padding: const EdgeInsets.all(7.0),

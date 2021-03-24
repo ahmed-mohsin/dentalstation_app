@@ -8,7 +8,7 @@ class HomePageCategories extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 200,
-      child: ListView(
+      child: ListView(physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         children: [
           SizedBox(
