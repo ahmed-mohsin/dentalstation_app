@@ -34,7 +34,24 @@ class App extends StatelessWidget {
       ],
       title: 'Dental Station',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.teal),
+      theme: ThemeData(primarySwatch: Colors.teal,
+        textTheme: TextTheme(
+          bodyText1: TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+            height: 1.3,
+          ),
+          bodyText2: TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+            height: 1.2,
+          ),
+          button: TextStyle(color: Colors.black),
+          headline1: TextStyle(
+            color: Colors.black,
+            fontSize: 10,fontFamily: 'Poppins'
+          ),
+        ),),
       home: SplashScreen(),
     );
   }
