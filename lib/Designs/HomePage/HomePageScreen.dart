@@ -155,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage>
         bottomNavigationBar: AnimatedBottomNavigationBar.builder(
           itemCount: iconList.length,
           tabBuilder: (int index, bool isActive) {
-            final color = isActive ? Colors.teal : Colors.grey;
+            final color = isActive ? darkTeal : Colors.grey;
             return Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -171,7 +171,7 @@ class _MyHomePageState extends State<MyHomePage>
                   child: AutoSizeText(
                     tabString[index],
                     maxLines: 1,
-                    style: TextStyle(color: color),
+                    style: TextStyle(color: color,fontFamily: 'Poppins',),
                     group: autoSizeGroup,
                   ),
                 )

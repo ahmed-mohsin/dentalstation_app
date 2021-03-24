@@ -1,5 +1,7 @@
 import 'package:dentalstation_app/Models/ProductModel.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:status_alert/status_alert.dart';
 
 class Cart extends Product {
   int itemQuantity;
@@ -45,6 +47,7 @@ class CartList extends StateNotifier<List<Cart>>{
       ...state,
       cart
     ];
+
   }
 
   void edit(Cart cart,int itemQuantity){

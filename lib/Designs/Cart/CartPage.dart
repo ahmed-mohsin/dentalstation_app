@@ -51,7 +51,7 @@ class _CartPageState extends State<CartPage> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(items[i].name),
+                                    Text(items[i].name,overflow: TextOverflow.fade,style: TextStyle(fontSize: 14),),
                                     ElegantNumberButton(
                                         initialValue: items[i].itemQuantity,
                                         minValue: 0,

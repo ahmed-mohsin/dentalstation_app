@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:status_alert/status_alert.dart';
+import 'package:share/share.dart';
 
 class itemCard extends StatelessWidget {
   int index;
@@ -37,7 +39,7 @@ class itemCard extends StatelessWidget {
               children: [
                 Center(
                   child: CachedNetworkImage(
-                    imageUrl:productList[index]['image'],
+                    imageUrl: productList[index]['image'],
                     //placeholder: (context, url) => CircularProgressIndicator(),
                     errorWidget: (context, url, error) => Icon(Icons.error),
                     height: 165,
@@ -50,10 +52,13 @@ class itemCard extends StatelessWidget {
                   width: 60,
                   //height: 24,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 2,right: 2),
+                    padding: const EdgeInsets.only(left: 2, right: 2),
                     child: Text(
-                      '${(productList[index]['price']/productList[index]['oldPrice']*100).round()}% OFF',
-                      style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontSize: 14),
+                      '${(productList[index]['price'] / productList[index]['oldPrice'] * 100).round()}% OFF',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Poppins',
+                          fontSize: 14),
                     ),
                   ),
                 ),
@@ -106,13 +111,9 @@ class itemCard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    IconButton(
-                        iconSize: 25,
-                        icon: Icon(
-                          LineIcons.addToShoppingCart,
-                          color: Colors.black87,
-                        ),
-                        onPressed: () async {
+                    Container(
+                      child: InkWell(
+                        onTap: () async {
                           Cart cartItem = new Cart(
                             id: productList[index]['id'],
                             image: productList[index]['image'],
@@ -122,16 +123,44 @@ class itemCard extends StatelessWidget {
                             price: productList[index]['price'],
                           );
                           var cartInstance = context.read(cartListProvider);
-                          if (isExisitInCart(cartInstance.state, cartItem))
+                          if (isExisitInCart(cartInstance.state, cartItem)) {
+                            print('the item in the cart');
                             context.read(cartListProvider).edit(cartItem, 1);
-                          else {
+                            StatusAlert.show(
+                              context,
+                              duration: Duration(seconds: 2),
+                              title: 'ok',
+                              subtitle: 'Item Already in your Cart',
+                              configuration:
+                                  IconConfiguration(icon: Icons.done),
+                            );
+                          } else {
+                            print('new item added to cart');
                             context.read(cartListProvider).add(cartItem);
                             var string = json
                                 .encode(context.read(cartListProvider).state);
                             print(string);
                             await storage.write(key: cartKey, value: string);
+                            StatusAlert.show(
+                              context,
+                              duration: Duration(seconds: 2),
+                              title: 'ok',
+                              subtitle: 'Item successfully added to your cart',
+                              configuration:
+                                  IconConfiguration(icon: Icons.done),
+                            );
                           }
-                        }),
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Icon(
+                            LineIcons.addToShoppingCart,
+                            color: Colors.black87,
+                            size: 25,
+                          ),
+                        ),
+                      ),
+                    ),
                     IconButton(
                         iconSize: 25,
                         icon: Icon(
@@ -162,5 +191,13 @@ class itemCard extends StatelessWidget {
       if (element.id == cartItem.id) found = true;
     });
     return found;
+  }
+
+  _onShare(BuildContext context,text,subject) async {
+
+    final RenderBox box = context.findRenderObject() as RenderBox;
+    await Share.share(text,
+        subject: subject,
+        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
   }
 }
