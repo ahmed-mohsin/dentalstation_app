@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Models/Cart.dart';
 import 'package:dentalstation_app/State/stateManger.dart';
 import 'package:dentalstation_app/constants/constants.dart';
@@ -24,6 +25,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     // final orientation = MediaQuery.of(context).orientation;
     return Container(
+      color: bac,
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Column(
@@ -51,7 +53,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height*.3,
+            height: MediaQuery.of(context).size.height * .35,
             width: MediaQuery.of(context).size.width,
             child: ListView.builder(
               shrinkWrap: true,
@@ -77,114 +79,131 @@ class CartCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final storage = FlutterSecureStorage();
 
-    return new Card(
-      elevation: 9,
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          width: MediaQuery.of(context).size.width*.4,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    Image.network(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(2),
+            border: Border.all(
+              color: Colors.grey[300],
+            )),
+        width: MediaQuery.of(context).size.width * .4,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Image.network(
                       productList[index]['image'],
-                      height: MediaQuery.of(context).size.height*.2 - 50,
-                      width: MediaQuery.of(context).size.width*.3,
+                      height: MediaQuery.of(context).size.height * .2,
+                      width: MediaQuery.of(context).size.width * .3,
                       fit: BoxFit.fill,
                     ),
-                    Container(height: 10,),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(color: Colors.red),
+                    width: 64,
+                    height: 17,
+                    child: Padding(
+                      padding: const EdgeInsets.all(2),
                       child: Text(
-                        productList[index]['name'],
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: TextStyle(color: Colors.black),
-                        textAlign: TextAlign.left,
+                        '55% OFF',
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Text(
-                        productList[index]['title'],
-                        maxLines: 1,
-                        style: TextStyle(color: Colors.grey),
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Text(
+                      productList[index]['name'],
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: TextStyle(color: Colors.black),
+                      textAlign: TextAlign.left,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            productList[index]['price'].toString(),
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          Text(
-                            productList[index]['oldPrice'].toString(),
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                        ],
-                      ),
+                  ),
+                  // Container(
+                  //   width: MediaQuery.of(context).size.width,
+                  //   child: Text(
+                  //     productList[index]['title'],
+                  //     maxLines: 1,
+                  //     style: TextStyle(color: Colors.grey),
+                  //     overflow: TextOverflow.ellipsis,
+                  //   ),
+                  // ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          productList[index]['price'].toString(),
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                        Text(
+                          productList[index]['oldPrice'].toString(),
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ],
                     ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: 30,
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    IconButton(
+                        icon: Icon(
+                          Icons.shopping_cart,
+                          color: Colors.black87,
+                        ),
+                        onPressed: () async {
+                          Cart cartItem = new Cart(
+                            id: productList[index]['id'],
+                            image: productList[index]['image'],
+                            itemQuantity: 1,
+                            name: productList[index]['name'],
+                            oldPrice: productList[index]['oldPrice'],
+                            price: productList[index]['price'],
+                          );
+                          var cartInstance = context.read(cartListProvider);
+                          if (isExisitInCart(cartInstance.state, cartItem))
+                            context.read(cartListProvider).edit(cartItem, 1);
+                          else {
+                            context.read(cartListProvider).add(cartItem);
+                            var string = json
+                                .encode(context.read(cartListProvider).state);
+                            print(string);
+                            await storage.write(key: cartKey, value: string);
+                          }
+                        }),
+                    IconButton(
+                        icon: Icon(
+                          LineIcons.heart,
+                          color: Colors.black87,
+                        ),
+                        onPressed: null),
+                    IconButton(
+                        icon: Icon(
+                          LineIcons.share,
+                          color: Colors.black87,
+                        ),
+                        onPressed: null)
                   ],
                 ),
               ),
-              Container(
-                height: 30,
-                width: MediaQuery.of(context).size.width,
-                child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      IconButton(
-                          icon: Icon(
-                            Icons.shopping_cart,
-                            color: Colors.black87,
-                          ),
-                          onPressed: () async {
-                            Cart cartItem = new Cart(
-                              id: productList[index]['id'],
-                              image: productList[index]['image'],
-                              itemQuantity: 1,
-                              name: productList[index]['name'],
-                              oldPrice: productList[index]['oldPrice'],
-                              price: productList[index]['price'],
-                            );
-                            var cartInstance = context.read(cartListProvider);
-                            if (isExisitInCart(cartInstance.state, cartItem))
-                              context.read(cartListProvider).edit(cartItem, 1);
-                            else {
-                              context.read(cartListProvider).add(cartItem);
-                              var string = json.encode(context.read(cartListProvider).state);
-                              print(string);
-                              await storage.write(key: cartKey, value: string);
-                            }
-                          }),
-                      IconButton(
-                          icon: Icon(
-                            LineIcons.heart,
-                            color: Colors.black87,
-                          ),
-                          onPressed: null),
-                      IconButton(
-                          icon: Icon(
-                            LineIcons.share,
-                            color: Colors.black87,
-                          ),
-                          onPressed: null)
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );

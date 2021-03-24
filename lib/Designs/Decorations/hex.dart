@@ -15,3 +15,4 @@ class HexColor extends Color {
 Color xx = HexColor('#E03757');
 //#1C5983
 Color darkTeal = HexColor('#1C5983');
+Color bac =HexColor('#EEF2F5');
