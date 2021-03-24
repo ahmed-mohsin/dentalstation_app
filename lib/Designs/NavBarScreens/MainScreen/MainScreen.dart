@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
+import 'package:dentalstation_app/Designs/NavBarScreens/MainScreen/HomePageCategories.dart';
 import 'package:dentalstation_app/Designs/NavBarScreens/MainScreen/ItemCard.dart';
+import 'package:dentalstation_app/Designs/NavBarScreens/MainScreen/TopBrands.dart';
 import 'package:dentalstation_app/Models/Cart.dart';
 import 'package:dentalstation_app/State/stateManger.dart';
 import 'package:dentalstation_app/constants/constants.dart';
@@ -24,48 +26,140 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final orientation = MediaQuery.of(context).orientation;
     return Container(
       color: bac,
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text(
-                  'Best Sellers',
-                  style: TextStyle(color: Colors.black87),
-                ),
-                IconButton(
-                    icon: Icon(
-                      Icons.more_horiz_rounded,
-                      color: Colors.black87,
-                    ),
-                    onPressed: () {})
-              ],
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    'Featured Categories',
+                    style: TextStyle(
+                        color: Colors.grey[700],
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14),
+                  ),
+                  IconButton(
+                      icon: Icon(
+                        Icons.more_horiz_rounded,
+                        color: darkTeal,
+                      ),
+                      onPressed: () {})
+                ],
+              ),
             ),
-          ),
-          Container(
-            height: 315,
-            width: MediaQuery.of(context).size.width,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: productList.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) {
-                return itemCard(index);
-              },
+            HomePageCategories(),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    'Best Sellers',
+                   style: TextStyle(
+              color: Colors.grey[700],
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14),
+                  ),
+                  IconButton(
+                      icon: Icon(
+                        Icons.more_horiz_rounded,
+                        color: darkTeal,
+                      ),
+                      onPressed: () {})
+                ],
+              ),
             ),
-          )
-        ],
+            Container(
+              height: 315,
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: 4,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  return itemCard(index);
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    'Recommended For You',
+                    style: TextStyle(
+                        color: Colors.grey[700],
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14),
+                  ),
+                  IconButton(
+                      icon: Icon(
+                        Icons.more_horiz_rounded,
+                        color: darkTeal,
+                      ),
+                      onPressed: () {})
+                ],
+              ),
+            ),
+            Container(
+              height: 315,
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: 5,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  return itemCard(index + 4);
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    'Top Brands',
+                    style: TextStyle(
+                        color: Colors.grey[700],
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14),
+                  ),
+                  IconButton(
+                      icon: Icon(
+                        Icons.more_horiz_rounded,
+                        color: darkTeal,
+                      ),
+                      onPressed: () {})
+                ],
+              ),
+            ),
+            TopBrand(),
+            Container(
+              height: 100,
+            )
+          ],
+        ),
       ),
     );
   }

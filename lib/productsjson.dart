@@ -100,3 +100,100 @@ List productList =[
     "oldPrice": 40
   }
 ];
+
+List catList =[
+  {
+    "id": "1",
+    "name": "MATERIALS",
+    "image": "https://images.dentalkart.com/media/catalog/product/g/c/gc_soft_liner_1.jpg",
+  },
+  {
+    "id": "2",
+    "name": "Disposables",
+    "image": "https://images.dentalkart.com/media/catalog/product/d/e/dental-chair-cover_1__1.jpg",
+  },
+  {
+    "id": "3",
+    "name": "Restorative",
+    "image": "https://images.dentalkart.com/media/catalog/product/G/C/GCXX01_GOLD01_01_IMG1_9.jpg",
+  },
+  {
+    "id": "4",
+    "name": "IntraOral",
+    "image": "https://images.dentalkart.com/media/catalog/product/n/s/nsk_s-max1.jpg",
+  },
+  {
+    "id": "5",
+    "name": "Hygienic",
+    "image": "https://images.dentalkart.com/media/catalog/product/n/s/nsk_s-max1.jpg",
+  },
+  {
+    "id": "6",
+    "name": "Prosthodontic",
+    "image": "https://images.dentalkart.com/media/catalog/product/n/s/nsk_s-max1.jpg",
+  },
+  {
+    "id": "7",
+    "name": "Periodontal",
+    "image": "https://images.dentalkart.com/media/catalog/product/n/s/nsk_s-max1.jpg",
+  },
+  {
+    "id": "8",
+    "name": "Laboratory",
+    "image": "https://images.dentalkart.com/media/catalog/product/n/s/nsk_s-max1.jpg",
+  },
+  {
+    "id": "7",
+    "name": "Endodontics",
+    "image": "https://images.dentalkart.com/media/catalog/product/n/s/nsk_s-max1.jpg",
+  },
+  {
+    "id": "8",
+    "name": "Implantology",
+    "image": "https://images.dentalkart.com/media/catalog/product/n/s/nsk_s-max1.jpg",
+  }
+];
+
+List brandList =[
+  {
+    "id": "1",
+    "name": "Waldent",
+    "image": "https://images.dentalkart.com/media/brands/waldent.png",
+  },
+  {
+    "id": "2",
+    "name": "Waldent Instruments",
+    "image": "https://images.dentalkart.com/media/brand//w/a/waldent_fine_instrument.png",
+  },
+  {
+    "id": "3",
+    "name": "Woodpecker",
+    "image": "https://images.dentalkart.com/media/brands/woodpecker.png",
+  },
+  {
+    "id": "4",
+    "name": "Dr. Morepen",
+    "image": "https://images.dentalkart.com/media/brand//d/r/dr.-morepen.jpg",
+  },
+  {
+    "id": "5",
+    "name": "SuperEndo",
+    "image": "https://images.dentalkart.com/media/brand//s/u/super_endo_logo_1_.jpg",
+  },
+  {
+    "id": "6",
+    "name": "EndoKing",
+    "image": "https://images.dentalkart.com/media/brand//e/n/endoking-logo.jpg",
+  },
+  {
+    "id": "7",
+    "name": "GC",
+    "image": "https://images.dentalkart.com/media/brands/gc.png",
+  },
+  {
+    "id": "8",
+    "name": "GDC",
+    "image": "https://images.dentalkart.com/media/brands/gdc.png",
+  },
+
+];
