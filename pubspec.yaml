@@ -39,7 +39,12 @@ dependencies:
   flutter_secure_storage: ^4.1.0
   cached_network_image: ^2.5.1
   share: ^2.0.1   #need ios configuration
-
+  carousel_slider: ^3.0.0
+  flutter_card_swipper: ^0.4.0
+  custom_timer: ^0.0.3
+  timer_count_down: ^2.0.0
+  flip_panel: ^1.0.1
+  vertical_tabs: ^0.2.0
 
 
 

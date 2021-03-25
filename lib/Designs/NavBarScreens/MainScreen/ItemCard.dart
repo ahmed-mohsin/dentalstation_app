@@ -166,7 +166,12 @@ class itemCard extends StatelessWidget {
                           LineIcons.heart,
                           color: Colors.black87,
                         ),
-                        onPressed: null),
+                        onPressed: () {
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (_) => SwipeFeedPage()));
+                        }),
                     IconButton(
                         iconSize: 25,
                         icon: Icon(
@@ -192,8 +197,7 @@ class itemCard extends StatelessWidget {
     return found;
   }
 
-  _onShare(BuildContext context,text,subject) async {
-
+  _onShare(BuildContext context, text, subject) async {
     final RenderBox box = context.findRenderObject() as RenderBox;
     await Share.share(text,
         subject: subject,

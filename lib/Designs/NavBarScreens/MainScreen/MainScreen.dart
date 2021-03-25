@@ -1,17 +1,16 @@
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:custom_timer/custom_timer.dart';
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/NavBarScreens/MainScreen/HomePageCategories.dart';
 import 'package:dentalstation_app/Designs/NavBarScreens/MainScreen/ItemCard.dart';
 import 'package:dentalstation_app/Designs/NavBarScreens/MainScreen/TopBrands.dart';
-import 'package:dentalstation_app/Models/Cart.dart';
-import 'package:dentalstation_app/State/stateManger.dart';
-import 'package:dentalstation_app/constants/constants.dart';
+import 'package:dentalstation_app/Designs/NavBarScreens/MainScreen/swipper.dart';
+
 import 'package:dentalstation_app/productsjson.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:line_icons/line_icons.dart';
-import 'package:dentalstation_app/State/stateManger.dart';
+
 
 class MainScreen extends StatefulWidget {
   @override
@@ -36,8 +35,58 @@ class _MainScreenState extends State<MainScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           children: [
+            CarouselSlider.builder(
+              itemCount: images.length,
+              options: CarouselOptions(
+                height: 150,
+                autoPlay: true,
+                aspectRatio: 1.0,
+                enlargeCenterPage: false,
+              ),
+              itemBuilder: (context, index, realIdx) {
+                return Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(
+                      child: CachedNetworkImage(
+                          imageUrl: images[index],
+                          fit: BoxFit.fill,
+                          height: 150,
+                          width: MediaQuery.of(context).size.width)),
+                );
+              },
+            ),
+            Container(color: Colors.amber,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          'WOW Offers',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Poppins',fontWeight: FontWeight.w700,
+                              fontSize: 14),
+                        ),
+                        IconButton(
+                            icon: Icon(
+                              Icons.more_horiz_rounded,
+                              color: darkTeal,
+                            ),
+                            onPressed: () {})
+                      ],
+                    ),
+                  ),
+                  SwipperSection(),
+                  Container(height: 10,)
+                ],
+              ),
+            ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3),
+              padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
@@ -60,7 +109,6 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
             HomePageCategories(),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 3),
               child: Row(
@@ -69,11 +117,11 @@ class _MainScreenState extends State<MainScreen> {
                 children: [
                   Text(
                     'Best Sellers',
-                   style: TextStyle(
-              color: Colors.grey[700],
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14),
+                    style: TextStyle(
+                        color: Colors.grey[700],
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14),
                   ),
                   IconButton(
                       icon: Icon(

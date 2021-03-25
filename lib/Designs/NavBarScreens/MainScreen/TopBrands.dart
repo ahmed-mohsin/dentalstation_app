@@ -16,9 +16,11 @@ class TopBrand extends StatelessWidget {
           itemCount: brandList.length,
           itemBuilder: (c, index) {
             return Padding(
-              padding: const EdgeInsets.all(7.0),
+              padding: const EdgeInsets.all(4.0),
               child: Container(
-                decoration: BoxDecoration(color: Colors.white),
+                decoration: BoxDecoration(color: Colors.white,border: Border.all(
+                color: Colors.grey[300],
+                )),
                 child: Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Column(

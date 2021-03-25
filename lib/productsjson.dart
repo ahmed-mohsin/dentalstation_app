@@ -7,7 +7,8 @@ List productList =[
 "category": "Equipments",
 "title": "Optic handpiece",
 "price": 50,
-"oldPrice": 100
+"oldPrice": 100,
+  'willEnd':DateTime.now().add(Duration(hours: 1,minutes: 20))
 },
 {
 "id": "2",
@@ -17,7 +18,8 @@ List productList =[
 "category": "Equipments",
 "title": "LED polymerization light",
 "price": 42,
-"oldPrice":120
+"oldPrice":120,
+  'willEnd':DateTime.now().add(Duration(hours: 13,minutes: 4))
 },
 {
 "id": "3",
@@ -27,7 +29,8 @@ List productList =[
 "category": "Equipments",
 "title": "Straight Handpiece",
 "price": 10,
-"oldPrice": 100
+"oldPrice": 100,
+  'willEnd':DateTime.now().add(Duration(hours: 5,minutes: 9))
 },
 {
 "id": "4",
@@ -37,7 +40,8 @@ List productList =[
 "category": "category 4",
 "title": "Contra Angle Handpiece",
 "price": 20,
-"oldPrice": 40
+"oldPrice": 40,
+  'willEnd':DateTime.now().add(Duration(hours: 7,minutes: 5))
 },
   {
     "id": "5",
@@ -47,7 +51,8 @@ List productList =[
     "category": "Equipments",
     "title": "For Easy Handling Of Sticky Material",
     "price": 60,
-    "oldPrice": 80
+    "oldPrice": 80,
+    'willEnd':DateTime.now().add(Duration(hours: 6,minutes: 4))
   },
   {
     "id": "6",
@@ -57,7 +62,8 @@ List productList =[
     "category": "Equipments",
     "title": "LED polymerization light",
     "price": 42,
-    "oldPrice":120
+    "oldPrice":120,
+    'willEnd':DateTime.now().add(Duration(hours: 5,minutes: 32))
   },
   {
     "id": "7",
@@ -67,7 +73,8 @@ List productList =[
     "category": "Equipments",
     "title": "GP Points",
     "price": 75,
-    "oldPrice": 135
+    "oldPrice": 135,
+    'willEnd':DateTime.now().add(Duration(hours: 0,minutes: 20))
   },
   {
     "id": "8",
@@ -77,7 +84,8 @@ List productList =[
     "category": "category 4",
     "title": "Dental Safety Memo Rotary Disc for Endo files",
     "price": 20,
-    "oldPrice": 40
+    "oldPrice": 40,
+    'willEnd':DateTime.now().add(Duration(hours: 0,minutes: 36))
   },
   {
     "id": "7",
@@ -87,7 +95,8 @@ List productList =[
     "category": "Equipments",
     "title": "6% Biocompatible Radio-opaque Gutta Percha Point",
     "price": 175,
-    "oldPrice": 250
+    "oldPrice": 250,
+    'willEnd':DateTime.now().add(Duration(hours: 0,minutes: 45))
   },
   {
     "id": "8",
@@ -97,7 +106,8 @@ List productList =[
     "category": "category 4",
     "title": "Calcium Silicate-based Bio-ceramic Root Canal Sealer",
     "price": 20,
-    "oldPrice": 40
+    "oldPrice": 40,
+    'willEnd':DateTime.now().add(Duration(hours: 0,minutes: 7))
   }
 ];
 
@@ -196,4 +206,19 @@ List brandList =[
     "image": "https://images.dentalkart.com/media/brands/gdc.png",
   },
 
+];
+
+final List<String> imgList = [
+  'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
+  'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
+  'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+  'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
+  'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+  'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
+];
+final List<String> images = [
+  'https://images.dentalkart.com/media/homepage/brand/default/default_Disposables.jpg',
+  'https://images.dentalkart.com/media/homepage/brand/default/default_Cements.jpg',
+  'https://images.dentalkart.com/media/homepage/brand/default/default_Gown_2.jpg',
+  'https://images.dentalkart.com/media/homepage/brand/default/default_Rotary-files.jpg',
 ];
