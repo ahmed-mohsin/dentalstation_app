@@ -31,7 +31,7 @@ class _CategoriesState extends State<Categories> {
               catList[i]["name"],textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black87,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
                 fontFamily: 'CeraRound',
               ),
             ),
@@ -123,7 +123,7 @@ class _CategoriesState extends State<Categories> {
                                             catList[i]["subCat"][index]
                                                 ['dubCat'][i2]['name'],
                                             style: TextStyle(color: darkTeal,
-                                              fontWeight: FontWeight.w700,
+                                              fontWeight: FontWeight.w400,
                                               fontFamily: 'CeraRound',),textAlign: TextAlign.center,maxLines: 2,overflow: TextOverflow.fade,
                                           ),
                                         ),
@@ -154,12 +154,12 @@ class _CategoriesState extends State<Categories> {
         child: VerticalTabs(
                 tabTextStyle: TextStyle(),
                 tabsShadowColor: Colors.grey[200],
-                indicatorColor: Colors.orange,
+                indicatorColor: Colors.deepOrange,
                 selectedTabBackgroundColor: bac,
                 backgroundColor: Colors.indigoAccent,
                 tabBackgroundColor: Colors.white,indicatorSide: IndicatorSide.start,
                 // unselectedTabBackgroundColor: Colors.grey[200],
-                indicatorWidth: 3,initialIndex: 0,
+                indicatorWidth: 5,initialIndex: 0,
                 contentScrollAxis: Axis.vertical,
                  tabsWidth: 120,
                 tabs: tabs,
