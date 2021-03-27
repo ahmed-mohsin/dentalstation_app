@@ -23,7 +23,7 @@ class itemCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Container(
-        height: 315,
+        height: 300,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(4),
@@ -42,7 +42,7 @@ class itemCard extends StatelessWidget {
                     imageUrl: productList[index]['image'],
                     //placeholder: (context, url) => CircularProgressIndicator(),
                     errorWidget: (context, url, error) => Icon(Icons.error),
-                    height: 165,
+                    height: 100,
                     width: MediaQuery.of(context).size.width * .3,
                     fit: BoxFit.fill,
                   ),

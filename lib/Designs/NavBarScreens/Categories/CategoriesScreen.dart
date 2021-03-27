@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
-import 'package:dentalstation_app/Designs/NavBarScreens/Categories/tabs.dart';
+import 'package:dentalstation_app/Designs/NavBarScreens/Categories/singleSubCategeroyScreen.dart';
+import 'package:dentalstation_app/Designs/NavBarScreens/Categories/verticalTabs.dart';
 import 'package:flutter/material.dart';
 import 'package:vertical_tabs/vertical_tabs.dart';
 
@@ -89,48 +90,53 @@ class _CategoriesState extends State<Categories> {
                               itemBuilder: (BuildContext context, int i2) {
                                 return Padding(
                                   padding: const EdgeInsets.all(2.0),
-                                  child: new Container(
-                                    decoration: BoxDecoration(
-                                        color: bac,
-                                        borderRadius: BorderRadius.circular(5)),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Expanded(
-                                          child: Container(
-                                            color: Colors.white,
-                                            child: CachedNetworkImage(
-                                              height: double.infinity,
-                                              width: double.infinity,
-                                              imageUrl: catList[i]["subCat"]
-                                                      [index]['dubCat'][i2]
-                                                  ['image'],
-                                              //placeholder: (context, url) => CircularProgressIndicator(),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      Icon(Icons.error),
-                                              fit: BoxFit.fill,
+                                  child: InkWell(onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (_)=>SingleSubCatScreen(catList[i]["subCat"][index]
+                                    ['dubCat'][i2]['name'])));
+                                  },
+                                    child: new Container(
+                                      decoration: BoxDecoration(
+                                          color: bac,
+                                          borderRadius: BorderRadius.circular(5)),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              color: Colors.white,
+                                              child: CachedNetworkImage(
+                                                height: double.infinity,
+                                                width: double.infinity,
+                                                imageUrl: catList[i]["subCat"]
+                                                        [index]['dubCat'][i2]
+                                                    ['image'],
+                                                //placeholder: (context, url) => CircularProgressIndicator(),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Icon(Icons.error),
+                                                fit: BoxFit.fill,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: Text(
-                                            catList[i]["subCat"][index]
-                                                ['dubCat'][i2]['name'],
-                                            style: TextStyle(color: darkTeal,
-                                              fontWeight: FontWeight.w400,
-                                              fontFamily: 'CeraRound',),textAlign: TextAlign.center,maxLines: 2,overflow: TextOverflow.fade,
+                                          Padding(
+                                            padding: const EdgeInsets.all(4.0),
+                                            child: Text(
+                                              catList[i]["subCat"][index]
+                                                  ['dubCat'][i2]['name'],
+                                              style: TextStyle(color: darkTeal,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily: 'CeraRound',),textAlign: TextAlign.center,maxLines: 2,overflow: TextOverflow.fade,
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
+                                      // child: new Text(data[index]
+                                      //     ['image']), //just for testing, will fill with image later
                                     ),
-                                    // child: new Text(data[index]
-                                    //     ['image']), //just for testing, will fill with image later
                                   ),
                                 );
                               },
