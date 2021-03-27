@@ -11,6 +11,8 @@ import 'package:line_icons/line_icons.dart';
 import 'package:status_alert/status_alert.dart';
 import 'package:share/share.dart';
 
+import '../../ProductDetailsScreen.dart';
+
 class itemCard extends StatelessWidget {
   int index;
 
@@ -34,73 +36,82 @@ class itemCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: CachedNetworkImage(
-                    imageUrl: productList[index]['image'],
-                    //placeholder: (context, url) => CircularProgressIndicator(),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                    height: 100,
-                    width: MediaQuery.of(context).size.width * .3,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(color: Colors.redAccent),
-                  //height: 24,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 2, right: 2),
-                    child: Text(
-                      '${(productList[index]['price'] / productList[index]['oldPrice'] * 100).round()}% OFF',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Poppins',
-                          fontSize: 14),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) =>
+                            ProductDetailsScreen(productList[index]['name'])));
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: CachedNetworkImage(
+                      imageUrl: productList[index]['image'],
+                      //placeholder: (context, url) => CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                      height: 100,
+                      width: MediaQuery.of(context).size.width * .3,
+                      fit: BoxFit.fill,
                     ),
                   ),
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Padding(
+                  Container(
+                    decoration: BoxDecoration(color: Colors.redAccent),
+                    //height: 24,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 2, right: 2),
+                      child: Text(
+                        '${((productList[index]['oldPrice'] - productList[index]['price']) /productList[index]['oldPrice'] *100).round()}% OFF',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Poppins',
+                            fontSize: 14),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 8, right: 8, top: 4, bottom: 2),
+                      child: Text(
+                        productList[index]['name'],
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontFamily: 'Poppins'),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                  ),
+                  Padding(
                     padding: const EdgeInsets.only(
-                        left: 8, right: 8, top: 4, bottom: 2),
+                        left: 8, right: 8, top: 2, bottom: 2),
                     child: Text(
-                      productList[index]['name'],
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
+                      productList[index]['oldPrice'].toString() + ' EGP',
+                      style: TextStyle(
+                          color: Colors.grey,
+                          decoration: TextDecoration.lineThrough),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 8, right: 8, top: 2, bottom: 2),
+                    child: Text(
+                      productList[index]['price'].toString() + ' EGP',
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 12,
-                          fontFamily: 'Poppins'),
-                      textAlign: TextAlign.left,
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 8, right: 8, top: 2, bottom: 2),
-                  child: Text(
-                    productList[index]['oldPrice'].toString() + ' EGP',
-                    style: TextStyle(
-                        color: Colors.grey,
-                        decoration: TextDecoration.lineThrough),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 8, right: 8, top: 2, bottom: 2),
-                  child: Text(
-                    productList[index]['price'].toString() + ' EGP',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
             Container(
               height: 18,
