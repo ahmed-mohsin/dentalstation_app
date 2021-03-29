@@ -25,7 +25,7 @@ class itemCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Container(
-        height: 300,
+        height: 325,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(4),
@@ -52,7 +52,7 @@ class itemCard extends StatelessWidget {
                       imageUrl: productList[index]['image'],
                       //placeholder: (context, url) => CircularProgressIndicator(),
                       errorWidget: (context, url, error) => Icon(Icons.error),
-                      height: 100,
+                      height: 95,
                       width: MediaQuery.of(context).size.width * .3,
                       fit: BoxFit.fill,
                     ),
@@ -114,52 +114,17 @@ class itemCard extends StatelessWidget {
               ),
             ),
             Container(
-              height: 18,
+
               width: MediaQuery.of(context).size.width,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 4),
+                padding: const EdgeInsets.only(),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Container(
                       child: InkWell(
                         onTap: () async {
-                          Cart cartItem = new Cart(
-                            id: productList[index]['id'],
-                            image: productList[index]['image'],
-                            itemQuantity: 1,
-                            name: productList[index]['name'],
-                            oldPrice: productList[index]['oldPrice'],
-                            price: productList[index]['price'],
-                          );
-                          var cartInstance = context.read(cartListProvider);
-                          if (isExisitInCart(cartInstance.state, cartItem)) {
-                            print('the item in the cart');
-                            context.read(cartListProvider).edit(cartItem, 1);
-                            StatusAlert.show(
-                              context,
-                              duration: Duration(seconds: 2),
-                              title: 'ok',
-                              subtitle: 'Item Already in your Cart',
-                              configuration:
-                                  IconConfiguration(icon: Icons.done),
-                            );
-                          } else {
-                            print('new item added to cart');
-                            context.read(cartListProvider).add(cartItem);
-                            var string = json
-                                .encode(context.read(cartListProvider).state);
-                            print(string);
-                            await storage.write(key: cartKey, value: string);
-                            StatusAlert.show(
-                              context,
-                              duration: Duration(seconds: 2),
-                              title: 'ok',
-                              subtitle: 'Item successfully added to your cart',
-                              configuration:
-                                  IconConfiguration(icon: Icons.done),
-                            );
-                          }
+                          await addToCart(context, storage,1,index);
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -199,6 +164,7 @@ class itemCard extends StatelessWidget {
       ),
     );
   }
+
 
   bool isExisitInCart(List<Cart> state, Cart cartItem) {
     bool found = false;

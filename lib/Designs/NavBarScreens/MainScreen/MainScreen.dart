@@ -133,7 +133,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
             Container(
-              height: 300,
+              height: 250,
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(
                 shrinkWrap: true,
@@ -168,7 +168,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
             Container(
-              height: 280,
+              height: 250,
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(
                 shrinkWrap: true,

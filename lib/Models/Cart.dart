@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:dentalstation_app/Models/ProductModel.dart';
+import 'package:dentalstation_app/State/stateManger.dart';
+import 'package:dentalstation_app/constants/constants.dart';
+import 'package:dentalstation_app/productsjson.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:status_alert/status_alert.dart';
 
 class Cart extends Product {
@@ -78,4 +84,51 @@ class CartList extends StateNotifier<List<Cart>>{
       result+=(cartItem.itemQuantity*cartItem.price);
     return result;
   }
+}
+
+Future addToCart(BuildContext context, FlutterSecureStorage storage,itemQuantity,index) async {
+  Cart cartItem = new Cart(
+    id: productList[index]['id'],
+    image: productList[index]['image'],
+    itemQuantity: itemQuantity,
+    name: productList[index]['name'],
+    oldPrice: productList[index]['oldPrice'],
+    price: productList[index]['price'],
+  );
+  var cartInstance = context.read(cartListProvider);
+  if (isExisitInCart(cartInstance.state, cartItem)) {
+    print('the item in the cart');
+    context.read(cartListProvider).edit(cartItem, 1);
+    StatusAlert.show(
+      context,
+      duration: Duration(seconds: 2),
+      title: 'ok',
+      subtitle: 'Item Already in your Cart',
+      configuration:
+      IconConfiguration(icon: Icons.done),
+    );
+  } else {
+    print('new item added to cart');
+    context.read(cartListProvider).add(cartItem);
+    var string = json
+        .encode(context.read(cartListProvider).state);
+    print(string);
+    await storage.write(key: cartKey, value: string);
+    StatusAlert.show(
+      context,
+      duration: Duration(seconds: 2),
+      title: 'ok',
+      subtitle: 'Item successfully added to your cart',
+      configuration:
+      IconConfiguration(icon: Icons.done),
+    );
+  }
+}
+
+bool isExisitInCart(List<Cart> state, Cart cartItem) {
+  bool found = false;
+  state.forEach((element) {
+    if (element.id == cartItem.id) found = true;
+  });
+  return found;
 }

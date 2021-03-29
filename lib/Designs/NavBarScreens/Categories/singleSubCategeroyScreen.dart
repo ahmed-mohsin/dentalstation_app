@@ -4,7 +4,6 @@ import 'package:dentalstation_app/Designs/NavBarScreens/MainScreen/ItemCard.dart
 import 'package:dentalstation_app/productsjson.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class SingleSubCatScreen extends StatefulWidget {
   String subCatName;
