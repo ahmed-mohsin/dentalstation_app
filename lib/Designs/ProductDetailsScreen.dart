@@ -6,8 +6,8 @@ import 'package:line_icons/line_icons.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   String productName;
-
-  ProductDetailsScreen(this.productName);
+  int index;
+  ProductDetailsScreen(this.productName,this.index);
 
   @override
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
@@ -37,20 +37,24 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(5)),
-                        height: MediaQuery.of(context).size.height * .35,
-                        width: MediaQuery.of(context).size.width,
-                        child: CachedNetworkImage(
-                          imageUrl: productList[2]['image'],
-                          //placeholder: (context, url) => CircularProgressIndicator(),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
-                          width: MediaQuery.of(context).size.width * .50,
-                          fit: BoxFit.fill,
+                      padding: const EdgeInsets.only(),
+                      child: Card(
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(5)),
+                          height: MediaQuery.of(context).size.height * .35,
+                          width: MediaQuery.of(context).size.width,
+                          child:  Hero(tag:productList[widget.index]['name'],
+                            child: CachedNetworkImage(
+                              imageUrl: productList[widget.index]['image'],
+                              //placeholder: (context, url) => CircularProgressIndicator(),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                              width: MediaQuery.of(context).size.width * .50,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -62,13 +66,24 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(productList[2]['name']),
-                              Text(productList[2]['title']),
-                              Row(
-                                children: [
-                                  Text('Brand : '),
-                                  Text('Waldent'),
-                                ],
+                              Padding(
+                                padding: const EdgeInsets.only(top: 4),
+                                child: Text(
+                                  productList[2]['name'],
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontFamily: 'Poppins',fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 3),
+                                child: Text(productList[2]['title'],style:  TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontFamily: 'Poppins',
+                                    ),),
                               ),
                               Text(
                                 productList[2]['price'].toString() + ' EGP',
@@ -119,26 +134,81 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         //     MaterialPageRoute(
                                         //         builder: (_) => SwipeFeedPage()));
                                       }),
-                                  IconButton(
-                                      iconSize: 25,
-                                      icon: Icon(
-                                        LineIcons.shareSquare,
-                                        color: Colors.black87,
-                                      ),
-                                      onPressed: null)
                                 ],
                               )
                             ],
                           ),
                         )),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      padding: const EdgeInsets.symmetric(vertical: 5),
                       child: Container(
                         color: Colors.white,
-                        height: 300,
-                        width: 50,
+                        width: MediaQuery.of(context).size.width,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Description',
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                              ),
+                              Icon(Icons.arrow_forward_ios)
+                            ],
+                          ),
+                        ),
                       ),
-                    )
+                    ),
+                    Container(
+                      color: Colors.white,
+                      width: MediaQuery.of(context).size.width,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 4),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Text('Brand : '),
+                                Text('Waldent'),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text('Country of Origin : '),
+                                Text('Egypt'),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text('Vendor : '),
+                                Text('Domadent'),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: Container(
+                        color: Colors.white,
+                        width: MediaQuery.of(context).size.width,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Share product',
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                              ),
+                              Icon(Icons.arrow_forward_ios)
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -149,6 +219,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   color: Colors.orange,
                   width: MediaQuery.of(context).size.width,
                   height: 60,
+                  child: Row(
+                    children: [],
+                  ),
                 )),
           ],
         ),

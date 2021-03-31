@@ -106,41 +106,50 @@ class _MyHomePageState extends State<MyHomePage>
       data: ThemeData.dark(),
       child: Scaffold(
         extendBody: true,
+        drawer: Drawer(
+          child: Container(
+            height: MediaQuery.of(context).size.height,width: 100,
+          ),
+        ),
         appBar: AppBar(
-          leading: Container(),
+          leading: Builder(
+            builder: (context) => IconButton(
+              icon: Icon(Icons.menu_rounded),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            ),
+          ),
           centerTitle: true,
           actions: [
             Container(
                 //decoration: BoxDecoration(color: xx, shape: BoxShape.circle),
                 child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Consumer(
-                    builder: (cx, watch, v) {
-                      return Badge(
-                        child: IconButton(
-                            icon: Icon(LineIcons.shoppingCart),
-                            onPressed: () {
-                              //CartPage
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CartPage()),
-                              );
-                            }),
-                        position: BadgePosition(top: 0, end: 1),
-                        animationDuration: (Duration(milliseconds: 500)),
-                        animationType: BadgeAnimationType.scale,
-                        showBadge: true,
-                        badgeContent: Text(
-                          '${watch(cartListProvider.state).length}',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                        badgeColor: Colors.pink,
-                      );
-                    },
-                  ),
-                ))
+              padding: const EdgeInsets.all(5.0),
+              child: Consumer(
+                builder: (cx, watch, v) {
+                  return Badge(
+                    child: IconButton(
+                        icon: Icon(LineIcons.shoppingCart),
+                        onPressed: () {
+                          //CartPage
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CartPage()),
+                          );
+                        }),
+                    position: BadgePosition(top: 0, end: 1),
+                    animationDuration: (Duration(milliseconds: 500)),
+                    animationType: BadgeAnimationType.scale,
+                    showBadge: true,
+                    badgeContent: Text(
+                      '${watch(cartListProvider.state).length}',
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                    badgeColor: Colors.pink,
+                  );
+                },
+              ),
+            ))
           ],
           title: Text(
             "Dental Station",
@@ -171,7 +180,10 @@ class _MyHomePageState extends State<MyHomePage>
                   child: AutoSizeText(
                     tabString[index],
                     maxLines: 1,
-                    style: TextStyle(color: color,fontFamily: 'Poppins',),
+                    style: TextStyle(
+                      color: color,
+                      fontFamily: 'Poppins',
+                    ),
                     group: autoSizeGroup,
                   ),
                 )

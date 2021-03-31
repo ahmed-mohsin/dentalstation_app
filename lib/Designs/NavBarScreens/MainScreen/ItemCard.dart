@@ -41,20 +41,22 @@ class itemCard extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (_) =>
-                            ProductDetailsScreen(productList[index]['name'])));
+                        builder: (_) => ProductDetailsScreen(
+                            productList[index]['name'], index)));
               },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
-                    child: CachedNetworkImage(
-                      imageUrl: productList[index]['image'],
-                      //placeholder: (context, url) => CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                      height: 95,
-                      width: MediaQuery.of(context).size.width * .3,
-                      fit: BoxFit.fill,
+                    child: Hero(tag:productList[index]['name'] ,
+                      child: CachedNetworkImage(
+                        imageUrl: productList[index]['image'],
+                        //placeholder: (context, url) => CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        height: 95,
+                        width: MediaQuery.of(context).size.width * .3,
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
                   Container(
@@ -63,7 +65,7 @@ class itemCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 2, right: 2),
                       child: Text(
-                        '${((productList[index]['oldPrice'] - productList[index]['price']) /productList[index]['oldPrice'] *100).round()}% OFF',
+                        '${((productList[index]['oldPrice'] - productList[index]['price']) / productList[index]['oldPrice'] * 100).round()}% OFF',
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Poppins',
@@ -114,7 +116,6 @@ class itemCard extends StatelessWidget {
               ),
             ),
             Container(
-
               width: MediaQuery.of(context).size.width,
               child: Padding(
                 padding: const EdgeInsets.only(),
@@ -124,7 +125,7 @@ class itemCard extends StatelessWidget {
                     Container(
                       child: InkWell(
                         onTap: () async {
-                          await addToCart(context, storage,1,index);
+                          await addToCart(context, storage, 1, index);
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -164,7 +165,6 @@ class itemCard extends StatelessWidget {
       ),
     );
   }
-
 
   bool isExisitInCart(List<Cart> state, Cart cartItem) {
     bool found = false;

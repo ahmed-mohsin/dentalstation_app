@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:custom_timer/custom_timer.dart';
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/NavBarScreens/MainScreen/HomePageCategories.dart';
 import 'package:dentalstation_app/Designs/NavBarScreens/MainScreen/ItemCard.dart';
 import 'package:dentalstation_app/Designs/NavBarScreens/MainScreen/TopBrands.dart';
 import 'package:dentalstation_app/Designs/NavBarScreens/MainScreen/swipper.dart';
+import 'package:dentalstation_app/Designs/ProductDetailsScreen.dart';
 
 import 'package:dentalstation_app/productsjson.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +27,14 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Container(
       color: bac,
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width,
+      height: MediaQuery
+          .of(context)
+          .size
+          .height,
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -68,7 +74,8 @@ class _MainScreenState extends State<MainScreen> {
                           'WOW Offers',
                           style: TextStyle(
                               color: Colors.black,
-                              fontFamily: 'Poppins',fontWeight: FontWeight.w700,
+                              fontFamily: 'Poppins', fontWeight: FontWeight
+                              .w700,
                               fontSize: 14),
                         ),
                         IconButton(
@@ -134,7 +141,10 @@ class _MainScreenState extends State<MainScreen> {
             ),
             Container(
               height: 250,
-              width: MediaQuery.of(context).size.width,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
               child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: 4,
@@ -169,7 +179,10 @@ class _MainScreenState extends State<MainScreen> {
             ),
             Container(
               height: 250,
-              width: MediaQuery.of(context).size.width,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
               child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: 5,

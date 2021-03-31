@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dentalstation_app/Designs/NavBarScreens/Categories/singleSubCategeroyScreen.dart';
 import 'package:dentalstation_app/productsjson.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,8 @@ class HomePageCategories extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 200,
-      child: ListView(physics: BouncingScrollPhysics(),
+      child: ListView(
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         children: [
           SizedBox(
@@ -23,20 +25,25 @@ class HomePageCategories extends StatelessWidget {
                 border: Border.all(
                   color: Colors.grey[300],
                 )),
-            child: Column(
-              children: [
-                Text(
-                  catList[0]['name'].toString(),
-                  style: TextStyle(color: Colors.black,fontFamily: 'Poppins',fontSize: 15),
-                ),
-                CachedNetworkImage(
-                  imageUrl: catList[0]['image'],
-                  //placeholder: (context, url) => CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                  height: 165,
-                  fit: BoxFit.fill,
-                )
-              ],
+            child: InkWell(onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (_)=>SingleSubCatScreen(catList[0]['name'].toString())));
+            },
+              child: Column(
+                children: [
+                  Text(
+                    catList[0]['name'].toString(),
+                    style: TextStyle(
+                        color: Colors.black, fontFamily: 'Poppins', fontSize: 15),
+                  ),
+                  CachedNetworkImage(
+                    imageUrl: catList[0]['image'],
+                    //placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    height: 165,
+                    fit: BoxFit.fill,
+                  )
+                ],
+              ),
             ),
           ),
           GridView.builder(
@@ -57,19 +64,29 @@ class HomePageCategories extends StatelessWidget {
                       borderRadius: BorderRadius.circular(4),
                       border: Border.all(
                         color: Colors.grey[300],
-                      )),child: Column(children: [
-                  Text(
-                    catList[index+1]['name'].toString(),
-                    style: TextStyle(color: Colors.black,fontFamily: 'Poppins',fontSize: 10),
+                      )),
+                  child: InkWell(onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (_)=>SingleSubCatScreen(catList[index + 1]['name'].toString())));
+                  },
+                    child: Column(
+                      children: [
+                        Text(
+                          catList[index + 1]['name'].toString(),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Poppins',
+                              fontSize: 10),
+                        ),
+                        CachedNetworkImage(
+                          imageUrl: productList[index + 1]['image'],
+                          //placeholder: (context, url) => CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Icon(Icons.error),
+                          height: 70,
+                          fit: BoxFit.fill,
+                        )
+                      ],
+                    ),
                   ),
-                  CachedNetworkImage(
-                    imageUrl: productList[index+1]['image'],
-                    //placeholder: (context, url) => CircularProgressIndicator(),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                    height: 70,
-                    fit: BoxFit.fill,
-                  )
-                ],),
                 ),
               );
             },
