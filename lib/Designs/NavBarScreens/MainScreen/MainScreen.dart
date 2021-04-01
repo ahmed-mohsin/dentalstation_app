@@ -161,6 +161,45 @@ class _MainScreenState extends State<MainScreen> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
+                    'Recently Added',
+                    style: TextStyle(
+                        color: Colors.grey[700],
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14),
+                  ),
+                  IconButton(
+                      icon: Icon(
+                        Icons.more_horiz_rounded,
+                        color: darkTeal,
+                      ),
+                      onPressed: () {})
+                ],
+              ),
+            ),
+
+            Container(
+              height: 250,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: 4,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  return itemCard(index);
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
                     'Recommended For You',
                     style: TextStyle(
                         color: Colors.grey[700],

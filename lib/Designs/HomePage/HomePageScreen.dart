@@ -7,9 +7,10 @@ import 'package:dentalstation_app/Designs/Cart/CartPage.dart';
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/NavBar/NavigationBar.dart';
 import 'package:dentalstation_app/Designs/NavBarScreens/Categories/CategoriesScreen.dart';
+import 'package:dentalstation_app/Designs/NavBarScreens/Deals/DealsScreen.dart';
 import 'package:dentalstation_app/Designs/NavBarScreens/MainScreen/MainScreen.dart';
 import 'package:dentalstation_app/Designs/NavBarScreens/MyAccount/MyAccount.dart';
-import 'package:dentalstation_app/Designs/NavBarScreens/Offers/OffersScreen.dart';
+import 'package:dentalstation_app/Designs/drawer.dart';
 import 'package:dentalstation_app/State/stateManger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -58,13 +59,13 @@ class _MyHomePageState extends State<MyHomePage>
   final tabString = <String>[
     'MainScreen',
     'Categories',
-    'Offers',
+    'Deals',
     'MyAccount',
   ];
   final homePageWidgets = <Widget>[
     MainScreen(),
     Categories(),
-    Offers(),
+    Deals(),
     MyAccount(),
   ];
 
@@ -106,11 +107,7 @@ class _MyHomePageState extends State<MyHomePage>
       data: ThemeData.dark(),
       child: Scaffold(
         extendBody: true,
-        drawer: Drawer(
-          child: Container(
-            height: MediaQuery.of(context).size.height,width: 100,
-          ),
-        ),
+        drawer: AppDrawer(),
         appBar: AppBar(
           leading: Builder(
             builder: (context) => IconButton(
@@ -206,3 +203,4 @@ class _MyHomePageState extends State<MyHomePage>
     );
   }
 }
+

@@ -2,12 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/productsjson.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_elegant_number_button/flutter_elegant_number_button.dart';
 import 'package:line_icons/line_icons.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   String productName;
   int index;
-  ProductDetailsScreen(this.productName,this.index);
+
+  ProductDetailsScreen(this.productName, this.index);
 
   @override
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
@@ -33,6 +35,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -45,7 +48,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               borderRadius: BorderRadius.circular(5)),
                           height: MediaQuery.of(context).size.height * .35,
                           width: MediaQuery.of(context).size.width,
-                          child:  Hero(tag:productList[widget.index]['name'],
+                          child: Hero(
+                            tag: productList[widget.index]['name'],
                             child: CachedNetworkImage(
                               imageUrl: productList[widget.index]['image'],
                               //placeholder: (context, url) => CircularProgressIndicator(),
@@ -71,19 +75,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 child: Text(
                                   productList[2]['name'],
                                   style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 15,
-                                    fontFamily: 'Poppins',fontWeight: FontWeight.bold
-                                  ),
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 3),
-                                child: Text(productList[2]['title'],style:  TextStyle(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 3),
+                                child: Text(
+                                  productList[2]['title'],
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 15,
                                     fontFamily: 'Poppins',
-                                    ),),
+                                  ),
+                                ),
                               ),
                               Text(
                                 productList[2]['price'].toString() + ' EGP',
@@ -190,7 +198,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      padding: const EdgeInsets.symmetric(vertical: 3),
                       child: Container(
                         color: Colors.white,
                         width: MediaQuery.of(context).size.width,
@@ -209,6 +217,29 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 3),
+                      child: Container(
+                        color: Colors.white,
+                        width: MediaQuery.of(context).size.width,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Ask about the product',
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                              ),
+                              Icon(Icons.arrow_forward_ios)
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 70,
+                    )
                   ],
                 ),
               ),
@@ -216,11 +247,52 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             Positioned(
                 bottom: 0,
                 child: Container(
-                  color: Colors.orange,
+                  color: Colors.white,
                   width: MediaQuery.of(context).size.width,
                   height: 60,
                   child: Row(
-                    children: [],
+                    children: [
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                      //   child: Container(
+                      //     width: 50,
+                      //     child: IconButton(
+                      //       onPressed: () {},
+                      //       icon: Icon(LineIcons.whatSApp),
+                      //     ),
+                      //   ),
+                      // ),
+                      ElegantNumberButton(
+                          color: Colors.deepOrange,
+                          buttonSizeWidth: 30,
+                          buttonSizeHeight: 30,
+                          initialValue: 0,
+                          minValue: 0,
+                          maxValue: 100,
+                          onChanged: (val) async {
+                            setState(() {});
+                          },
+                          decimalPlaces: 0),
+                      Expanded(
+                          child: Padding(
+                        padding:
+                            const EdgeInsets.only(top: 8, bottom: 8, right: 4),
+                        child: Container(
+                          child: FlatButton(
+                            color: Colors.deepOrange,
+                            onPressed: () {
+                              print('ghgh');
+                            },
+                            child: Container(
+                              child: Text(
+                                'add to cart',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ))
+                    ],
                   ),
                 )),
           ],

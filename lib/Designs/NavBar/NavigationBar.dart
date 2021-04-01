@@ -13,46 +13,46 @@ class NavigationScreen extends StatefulWidget {
 
 class _NavigationScreenState extends State<NavigationScreen>
     with TickerProviderStateMixin {
-  AnimationController _controller;
+  //AnimationController _controller;
   Animation<double> animation;
 
   @override
   void didUpdateWidget(NavigationScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.widgy != widget.widgy) {
-      _startAnimation();
+     // _startAnimation();
     }
   }
 
   @override
   void initState() {
-    _controller = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 1000),
-    );
-    animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.ease,
-    );
-    _controller.forward();
+    // _controller = AnimationController(
+    //   vsync: this,
+    //   duration: Duration(milliseconds: 1000),
+    // );
+    // animation = CurvedAnimation(
+    //   parent: _controller,
+    //   curve: Curves.ease,
+    // );
+    // _controller.forward();
     super.initState();
   }
 
-  _startAnimation() {
-    _controller = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 1000),
-    );
-    animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.fastOutSlowIn,
-    );
-    _controller.forward();
-  }
+  // _startAnimation() {
+  //   _controller = AnimationController(
+  //     vsync: this,
+  //     duration: Duration(milliseconds: 1000),
+  //   );
+  //   animation = CurvedAnimation(
+  //     parent: _controller,
+  //     curve: Curves.fastOutSlowIn,
+  //   );
+  //   _controller.forward();
+  // }
 
   @override
   void dispose() {
-    _controller.dispose();
+    //_controller.dispose();
     super.dispose();
   }
 
