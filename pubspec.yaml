@@ -47,6 +47,7 @@ dependencies:
   vertical_tabs: ^0.2.0
   clippy_flutter: ^1.1.1
   dart_random_choice: ^0.0.2
+  fcm_config: ^3.0.3
 
 
 

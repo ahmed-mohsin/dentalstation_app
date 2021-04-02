@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,7 +9,11 @@ import 'package:flutter/services.dart';
 import 'Designs/Splash/SplshScreen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  print("Handling a background message: ${message.messageId}");
+}
 Future<void> main() async {
+  await FCMConfig().init(onBackgroundMessage:_firebaseMessagingBackgroundHandler);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 

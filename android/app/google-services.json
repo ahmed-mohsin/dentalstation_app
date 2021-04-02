@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "218796122202-1fjc3ueea6e4aqo69jlos6cpg1vi6kdr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "amo.itcorner.dentalstation_app",
+            "certificate_hash": "035c8ac26dbf3dc76595edf8502ec47cf3870002"
+          }
+        },
+        {
           "client_id": "218796122202-v9qb559gtj5qktbnv1h75r2p3pq7lole.apps.googleusercontent.com",
           "client_type": 3
         }
