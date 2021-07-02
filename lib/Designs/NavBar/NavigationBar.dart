@@ -45,7 +45,7 @@ class _NavigationScreenState extends State<NavigationScreen>
     );
     animation = CurvedAnimation(
       parent: _controller,
-      curve: Curves.fastOutSlowIn,
+      curve: Curves.bounceIn,
     );
     _controller.forward();
   }

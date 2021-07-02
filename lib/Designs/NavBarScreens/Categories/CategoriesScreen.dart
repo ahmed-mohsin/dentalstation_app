@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/NavBarScreens/Categories/singleSubCategeroyScreen.dart';
-import 'package:dentalstation_app/Designs/NavBarScreens/Categories/verticalTabs.dart';
 import 'package:flutter/material.dart';
 import 'package:vertical_tabs/vertical_tabs.dart';
 
