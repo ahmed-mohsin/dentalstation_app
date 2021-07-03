@@ -19,7 +19,7 @@ class _ForgePasswordScreenState extends State<ForgePasswordScreen> {
 
   //final TextEditingController userAddress = new TextEditingController();
   //final TextEditingController userEmail = new TextEditingController();
-  final TextEditingController password = new TextEditingController();
+  //final TextEditingController password = new TextEditingController();
 
   //final TextEditingController confirmPassword = new TextEditingController();
   bool _validate = false;
@@ -345,7 +345,7 @@ class _ForgePasswordScreenState extends State<ForgePasswordScreen> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     PinCodeVerificationScreen(
-                                                        '201553969051')));
+                                                        '201553969051','1234')));
 
                                         Scaffold.of(context).showSnackBar(
                                             SnackBar(

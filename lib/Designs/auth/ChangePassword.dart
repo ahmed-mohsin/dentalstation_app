@@ -1,29 +1,22 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/auth/PinCodeVerificationScreen.dart';
-import 'package:dentalstation_app/Designs/auth/authServices.dart';
-import 'package:dentalstation_app/constants/baseUrl.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:http/http.dart' as http;
 
-class Registration extends StatefulWidget {
-  const Registration({
+class ChangePassWord extends StatefulWidget {
+  const ChangePassWord({
     Key key,
   }) : super(key: key);
 
   @override
-  _RegistrationState createState() => _RegistrationState();
+  _ChangePassWordState createState() => _ChangePassWordState();
 }
 
-class _RegistrationState extends State<Registration> {
+class _ChangePassWordState extends State<ChangePassWord> {
   bool _obscureText, rememberMeCheckValue;
-  final TextEditingController userName = new TextEditingController();
-  final TextEditingController userPhone = new TextEditingController();
-  final TextEditingController userAddress = new TextEditingController();
-  final TextEditingController userEmail = new TextEditingController();
+  // final TextEditingController userName = new TextEditingController();
+  // final TextEditingController userPhone = new TextEditingController();
+  // final TextEditingController userAddress = new TextEditingController();
+  // final TextEditingController userEmail = new TextEditingController();
   final TextEditingController password = new TextEditingController();
   final TextEditingController confirmPassword = new TextEditingController();
   bool _validate = false;
@@ -47,7 +40,7 @@ class _RegistrationState extends State<Registration> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create New account'),
+        title: Text('Enter New PassWord'),
         centerTitle: true,
         backgroundColor: darkTeal,
       ),
@@ -59,30 +52,30 @@ class _RegistrationState extends State<Registration> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Please Fill this Text fields To Create New Account',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontFamily: 'arn',
-                    fontSize: 15,
-                    color: Colors.teal,
-                    shadows: <Shadow>[
-                      // Shadow(
-                      //   offset: Offset(1, 1),
-                      //   blurRadius: 3.0,
-                      //   color: Color.fromARGB(255, 0, 0, 0),
-                      // ),
-                      Shadow(
-                        offset: Offset(1.5, 1.5),
-                        blurRadius: 8.0,
-                        color: Colors.grey,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: Text(
+              //     'Please Fill this Text fields To Create New Account',
+              //     textAlign: TextAlign.start,
+              //     style: TextStyle(
+              //       fontFamily: 'arn',
+              //       fontSize: 15,
+              //       color: Colors.teal,
+              //       shadows: <Shadow>[
+              //         // Shadow(
+              //         //   offset: Offset(1, 1),
+              //         //   blurRadius: 3.0,
+              //         //   color: Color.fromARGB(255, 0, 0, 0),
+              //         // ),
+              //         Shadow(
+              //           offset: Offset(1.5, 1.5),
+              //           blurRadius: 8.0,
+              //           color: Colors.grey,
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.only(top: 4),
                 child: Directionality(
@@ -92,74 +85,74 @@ class _RegistrationState extends State<Registration> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 8),
-                            child: TextFormField(
-                              controller: userName,
-                              autofocus: false,
-                              style: TextStyle(
-                                  fontSize: 15.0, color: Colors.black),
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Username',
-                                filled: true,
-                                errorText:
-                                    _validate ? 'Value Can\'t Be Empty' : null,
-                                fillColor: Colors.grey[200],
-                                contentPadding: const EdgeInsets.only(
-                                    left: 14.0, bottom: 6.0, top: 8.0),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.teal),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 8),
-                            child: TextFormField(
-                              controller: userPhone,
-                              autofocus: false,
-                              style: TextStyle(
-                                  fontSize: 15.0, color: Colors.black),
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Phone Number',
-                                filled: true,
-                                errorText:
-                                    _validate ? 'Value Can\'t Be Empty' : null,
-                                fillColor: Colors.grey[200],
-                                contentPadding: const EdgeInsets.only(
-                                    left: 14.0, bottom: 6.0, top: 8.0),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.teal),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: EdgeInsets.symmetric(
+                          //       horizontal: 10, vertical: 8),
+                          //   child: TextFormField(
+                          //     controller: userName,
+                          //     autofocus: false,
+                          //     style: TextStyle(
+                          //         fontSize: 15.0, color: Colors.black),
+                          //     decoration: InputDecoration(
+                          //       border: InputBorder.none,
+                          //       hintText: 'Username',
+                          //       filled: true,
+                          //       errorText:
+                          //       _validate ? 'Value Can\'t Be Empty' : null,
+                          //       fillColor: Colors.grey[200],
+                          //       contentPadding: const EdgeInsets.only(
+                          //           left: 14.0, bottom: 6.0, top: 8.0),
+                          //       focusedBorder: OutlineInputBorder(
+                          //         borderSide: BorderSide(color: Colors.teal),
+                          //         borderRadius: BorderRadius.circular(10.0),
+                          //       ),
+                          //       enabledBorder: UnderlineInputBorder(
+                          //         borderSide: BorderSide(color: Colors.grey),
+                          //         borderRadius: BorderRadius.circular(10.0),
+                          //       ),
+                          //     ),
+                          //     validator: (value) {
+                          //       if (value.isEmpty) {
+                          //         return 'Please enter some text';
+                          //       }
+                          //       return null;
+                          //     },
+                          //   ),
+                          // ),
+                          // Padding(
+                          //   padding: EdgeInsets.symmetric(
+                          //       horizontal: 10, vertical: 8),
+                          //   child: TextFormField(
+                          //     controller: userPhone,
+                          //     autofocus: false,
+                          //     style: TextStyle(
+                          //         fontSize: 15.0, color: Colors.black),
+                          //     decoration: InputDecoration(
+                          //       border: InputBorder.none,
+                          //       hintText: 'Phone Number',
+                          //       filled: true,
+                          //       errorText:
+                          //       _validate ? 'Value Can\'t Be Empty' : null,
+                          //       fillColor: Colors.grey[200],
+                          //       contentPadding: const EdgeInsets.only(
+                          //           left: 14.0, bottom: 6.0, top: 8.0),
+                          //       focusedBorder: OutlineInputBorder(
+                          //         borderSide: BorderSide(color: Colors.teal),
+                          //         borderRadius: BorderRadius.circular(10.0),
+                          //       ),
+                          //       enabledBorder: UnderlineInputBorder(
+                          //         borderSide: BorderSide(color: Colors.grey),
+                          //         borderRadius: BorderRadius.circular(10.0),
+                          //       ),
+                          //     ),
+                          //     validator: (value) {
+                          //       if (value.isEmpty) {
+                          //         return 'Please enter some text';
+                          //       }
+                          //       return null;
+                          //     },
+                          //   ),
+                          // ),
                           // Padding(
                           //   padding: EdgeInsets.symmetric(
                           //       horizontal: 10, vertical: 8),
@@ -194,40 +187,40 @@ class _RegistrationState extends State<Registration> {
                           //     },
                           //   ),
                           // ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 8),
-                            child: TextFormField(
-                              controller: userEmail,
-                              autofocus: false,
-                              style: TextStyle(
-                                  fontSize: 15.0, color: Colors.black),
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Email',
-                                filled: true,
-                                errorText:
-                                    _validate ? 'Value Can\'t Be Empty' : null,
-                                fillColor: Colors.grey[200],
-                                contentPadding: const EdgeInsets.only(
-                                    left: 14.0, bottom: 6.0, top: 8.0),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.teal),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: EdgeInsets.symmetric(
+                          //       horizontal: 10, vertical: 8),
+                          //   child: TextFormField(
+                          //     controller: userEmail,
+                          //     autofocus: false,
+                          //     style: TextStyle(
+                          //         fontSize: 15.0, color: Colors.black),
+                          //     decoration: InputDecoration(
+                          //       border: InputBorder.none,
+                          //       hintText: 'Email',
+                          //       filled: true,
+                          //       errorText:
+                          //       _validate ? 'Value Can\'t Be Empty' : null,
+                          //       fillColor: Colors.grey[200],
+                          //       contentPadding: const EdgeInsets.only(
+                          //           left: 14.0, bottom: 6.0, top: 8.0),
+                          //       focusedBorder: OutlineInputBorder(
+                          //         borderSide: BorderSide(color: Colors.teal),
+                          //         borderRadius: BorderRadius.circular(10.0),
+                          //       ),
+                          //       enabledBorder: UnderlineInputBorder(
+                          //         borderSide: BorderSide(color: Colors.grey),
+                          //         borderRadius: BorderRadius.circular(10.0),
+                          //       ),
+                          //     ),
+                          //     validator: (value) {
+                          //       if (value.isEmpty) {
+                          //         return 'Please enter some text';
+                          //       }
+                          //       return null;
+                          //     },
+                          //   ),
+                          // ),
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 8),
@@ -252,12 +245,12 @@ class _RegistrationState extends State<Registration> {
                                         left: 14.0, bottom: 6.0, top: 8.0),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.teal),
+                                      BorderSide(color: Colors.teal),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.grey),
+                                      BorderSide(color: Colors.grey),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                   ),
@@ -303,12 +296,12 @@ class _RegistrationState extends State<Registration> {
                                         left: 14.0, bottom: 6.0, top: 8.0),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.teal),
+                                      BorderSide(color: Colors.teal),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.grey),
+                                      BorderSide(color: Colors.grey),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                   ),
@@ -358,7 +351,19 @@ class _RegistrationState extends State<Registration> {
                                     // Validate returns true if the form is valid, or false
                                     // otherwise.
                                     if (_formKey.currentState.validate()) {
-                                      registerNewUser(context);
+                                      // If the form is valid, display a Snackbar.
+
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PinCodeVerificationScreen(
+                                                      '201553969051','1234')));
+
+                                      Scaffold.of(context).showSnackBar(
+                                          SnackBar(
+                                              content:
+                                              Text('Processing Data')));
                                     } else {
                                       Scaffold.of(context).showSnackBar(
                                           SnackBar(
@@ -372,7 +377,7 @@ class _RegistrationState extends State<Registration> {
                                   ),
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
-                                          new BorderRadius.circular(18.0),
+                                      new BorderRadius.circular(18.0),
                                       side: BorderSide(color: Colors.green)),
                                 ),
                               )),

@@ -346,7 +346,7 @@ class _LogginScreenState extends State<LogginScreen> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     PinCodeVerificationScreen(
-                                                        '201553969051')));
+                                                        '201553969051','1234')));
 
                                         Scaffold.of(context).showSnackBar(
                                             SnackBar(

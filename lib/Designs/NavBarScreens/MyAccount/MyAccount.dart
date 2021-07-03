@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:dentalstation_app/Designs/auth/ChangePassword.dart';
 import 'package:dentalstation_app/Designs/auth/Login.dart';
 import 'package:dentalstation_app/Designs/auth/Registration.dart';
+import 'package:dentalstation_app/Designs/auth/ResetPassWord.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -42,6 +44,45 @@ class MyAccount extends StatelessWidget {
               },
               child: Text(
                 'Login',
+                style: TextStyle(color: Colors.teal),
+              ),
+            ),
+          ),
+          //ChangePassWord
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ChangePassWord()));
+              },
+              child: Text(
+                'ChangePassWord',
+                style: TextStyle(color: Colors.teal),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ResetPassWord()));
+              },
+              child: Text(
+                'ResetPassWord',
+                style: TextStyle(color: Colors.teal),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+              onTap: () {
+                registerNewUser(context);
+              },
+              child: Text(
+                'Create New Account function',
                 style: TextStyle(color: Colors.teal),
               ),
             ),

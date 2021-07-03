@@ -8,8 +8,9 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 class PinCodeVerificationScreen extends StatefulWidget {
   final String phoneNumber;
+  final String code;
 
-  PinCodeVerificationScreen(this.phoneNumber);
+  PinCodeVerificationScreen(this.phoneNumber,this.code);
 
   @override
   _PinCodeVerificationScreenState createState() =>
@@ -204,7 +205,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                     onPressed: () {
                       formKey.currentState.validate();
                       // conditions for validating
-                      if (currentText.length != 4 || currentText != "1234") {
+                      if (currentText.length != 4 || currentText != widget.code) {
                         errorController.add(ErrorAnimationType
                             .shake); // Triggering error shake animation
                         setState(() {
