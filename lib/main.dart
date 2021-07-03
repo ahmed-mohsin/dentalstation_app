@@ -12,8 +12,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");
 }
+
 Future<void> main() async {
-  await FCMConfig().init(onBackgroundMessage:_firebaseMessagingBackgroundHandler);
+  FCMConfig.instance.init(onBackgroundMessage:_firebaseMessagingBackgroundHandler);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
@@ -21,6 +22,9 @@ Future<void> main() async {
     runApp(ProviderScope(child: App()));
   }, (error, stackTrace) {
     FirebaseCrashlytics.instance.recordError(error, stackTrace);
+  });
+  FCMConfig.messaging.getToken().then((token) {
+    print(token);
   });
 }
 
@@ -39,7 +43,8 @@ class App extends StatelessWidget {
       ],
       title: 'Dental Station',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.teal,
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
         textTheme: TextTheme(
           bodyText1: TextStyle(
             color: Colors.black,
@@ -53,10 +58,9 @@ class App extends StatelessWidget {
           ),
           button: TextStyle(color: Colors.black),
           headline1: TextStyle(
-            color: Colors.black,
-            fontSize: 10,fontFamily: 'Poppins'
-          ),
-        ),),
+              color: Colors.black, fontSize: 10, fontFamily: 'Poppins'),
+        ),
+      ),
       home: SplashScreen(),
     );
   }

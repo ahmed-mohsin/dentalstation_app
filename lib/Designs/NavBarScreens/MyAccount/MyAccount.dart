@@ -1,5 +1,11 @@
+import 'dart:async';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
+
+import '../../Decorations/hex.dart';
+import '../../HomePage/HomePageScreen.dart';
 
 class MyAccount extends StatelessWidget {
   @override
@@ -8,14 +14,17 @@ class MyAccount extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       //color: Colors.teal,
-      child: Column(mainAxisAlignment: MainAxisAlignment.start,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: InkWell(onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder:  (context) => LoginScreen()));
-            },
+            child: InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()));
+              },
               child: Text(
                 'Create New Account',
                 style: TextStyle(color: Colors.teal),
@@ -27,6 +36,7 @@ class MyAccount extends StatelessWidget {
     );
   }
 }
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({
     Key key,
@@ -67,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         title: Text('Create New account'),
         centerTitle: true,
-        backgroundColor: Colors.teal,
+        backgroundColor: darkTeal,
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -123,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 hintText: 'Username',
                                 filled: true,
                                 errorText:
-                                _validate ? 'Value Can\'t Be Empty' : null,
+                                    _validate ? 'Value Can\'t Be Empty' : null,
                                 fillColor: Colors.grey[200],
                                 contentPadding: const EdgeInsets.only(
                                     left: 14.0, bottom: 6.0, top: 8.0),
@@ -157,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 hintText: 'Phone Number',
                                 filled: true,
                                 errorText:
-                                _validate ? 'Value Can\'t Be Empty' : null,
+                                    _validate ? 'Value Can\'t Be Empty' : null,
                                 fillColor: Colors.grey[200],
                                 contentPadding: const EdgeInsets.only(
                                     left: 14.0, bottom: 6.0, top: 8.0),
@@ -191,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 hintText: 'Address',
                                 filled: true,
                                 errorText:
-                                _validate ? 'Value Can\'t Be Empty' : null,
+                                    _validate ? 'Value Can\'t Be Empty' : null,
                                 fillColor: Colors.grey[200],
                                 contentPadding: const EdgeInsets.only(
                                     left: 14.0, bottom: 6.0, top: 8.0),
@@ -225,7 +235,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 hintText: 'Email',
                                 filled: true,
                                 errorText:
-                                _validate ? 'Value Can\'t Be Empty' : null,
+                                    _validate ? 'Value Can\'t Be Empty' : null,
                                 fillColor: Colors.grey[200],
                                 contentPadding: const EdgeInsets.only(
                                     left: 14.0, bottom: 6.0, top: 8.0),
@@ -269,17 +279,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                     contentPadding: const EdgeInsets.only(
                                         left: 14.0, bottom: 6.0, top: 8.0),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.teal),
+                                      borderSide:
+                                          BorderSide(color: Colors.teal),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide:
-                                      BorderSide(color: Colors.grey),
+                                          BorderSide(color: Colors.grey),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                   ),
                                   validator: (value) {
-                                    if (!(value.length > 6) && value.isNotEmpty) {
+                                    if (!(value.length > 6) &&
+                                        value.isNotEmpty) {
                                       return "Password should contain more than 6 characters";
                                     }
                                     return null;
@@ -318,19 +330,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                     contentPadding: const EdgeInsets.only(
                                         left: 14.0, bottom: 6.0, top: 8.0),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.teal),
+                                      borderSide:
+                                          BorderSide(color: Colors.teal),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide:
-                                      BorderSide(color: Colors.grey),
+                                          BorderSide(color: Colors.grey),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                   ),
                                   validator: (value) {
-                                    if(value.isEmpty)
-                                      return 'Empty';
-                                    if(value != password.text)
+                                    if (value.isEmpty) return 'Empty';
+                                    if (value != password.text)
                                       return 'The two passwords are not matched';
                                     return null;
                                   },
@@ -369,23 +381,29 @@ class _LoginScreenState extends State<LoginScreen> {
                                 height: 50,
                                 width: double.infinity,
                                 child: RaisedButton(
-                                  color: Colors.green,
+                                  color: darkTeal,
                                   onPressed: () {
                                     // Validate returns true if the form is valid, or false
                                     // otherwise.
                                     if (_formKey.currentState.validate()) {
                                       // If the form is valid, display a Snackbar.
+
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PinCodeVerificationScreen(
+                                                      '201553969051')));
+
                                       Scaffold.of(context).showSnackBar(
                                           SnackBar(
                                               content:
-                                              Text('Processing Data')));
-
-
-                                    }else{
+                                                  Text('Processing Data')));
+                                    } else {
                                       Scaffold.of(context).showSnackBar(
                                           SnackBar(
-                                              content:
-                                              Text('Fill Required TextFields')));
+                                              content: Text(
+                                                  'Fill Required TextFields')));
                                     }
                                   },
                                   child: Text(
@@ -394,13 +412,284 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
-                                      new BorderRadius.circular(18.0),
+                                          new BorderRadius.circular(18.0),
                                       side: BorderSide(color: Colors.green)),
                                 ),
                               )),
                         ],
                       )),
                 ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class PinCodeVerificationScreen extends StatefulWidget {
+  final String phoneNumber;
+
+  PinCodeVerificationScreen(this.phoneNumber);
+
+  @override
+  _PinCodeVerificationScreenState createState() =>
+      _PinCodeVerificationScreenState();
+}
+
+class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
+  var onTapRecognizer;
+
+  TextEditingController textEditingController = TextEditingController();
+
+  // ..text = "123456";
+
+  StreamController<ErrorAnimationType> errorController;
+
+  bool hasError = false;
+  String currentText = "";
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    onTapRecognizer = TapGestureRecognizer()
+      ..onTap = () {
+        Navigator.pop(context);
+      };
+    errorController = StreamController<ErrorAnimationType>();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    errorController.close();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Account Activation'),
+        centerTitle: true,
+        backgroundColor: darkTeal,
+      ),
+      backgroundColor: Colors.white,
+      key: scaffoldKey,
+      body: GestureDetector(
+        onTap: () {},
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: ListView(
+            children: <Widget>[
+              SizedBox(height: 30),
+              SizedBox(height: 8),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(
+                  'Phone Number Verification',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                child: RichText(
+                  text: TextSpan(
+                      text: "Enter the code sent to ",
+                      children: [
+                        TextSpan(
+                            text: widget.phoneNumber,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15)),
+                      ],
+                      style: TextStyle(color: Colors.black54, fontSize: 15)),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Form(
+                key: formKey,
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 30),
+                    child: PinCodeTextField(enablePinAutofill: true,
+                      appContext: context,
+                      pastedTextStyle: TextStyle(
+                        color: Colors.green.shade600,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      length: 4,
+                      obscureText: false,
+                      obscuringCharacter: '*',
+                      animationType: AnimationType.fade,
+                      validator: (v) {
+                        if (v.length < 4) {
+                          return "Enter Activation code";
+                        } else {
+                          return null;
+                        }
+                      },
+                      pinTheme: PinTheme(
+                        shape: PinCodeFieldShape.box,
+                        borderRadius: BorderRadius.circular(5),
+                        fieldHeight: 60,
+                        selectedColor: Colors.teal,
+                        selectedFillColor: Colors.teal,
+                        fieldWidth: 50,
+                        inactiveColor: Colors.white38,
+                        activeColor: Colors.pink,
+                        inactiveFillColor: Colors.white38,
+                        activeFillColor: hasError ? Colors.red.shade100 : Colors.white,
+                      ),
+                      cursorColor: Colors.black,
+                      animationDuration: Duration(milliseconds: 300),
+                      textStyle: TextStyle(fontSize: 20, height: 1.6),
+                      backgroundColor: Colors.white,
+                      enableActiveFill: true,
+                      errorAnimationController: errorController,
+                      controller: textEditingController,
+                      keyboardType: TextInputType.number,
+                      boxShadows: [
+                        BoxShadow(
+                          offset: Offset(0, 1),
+                          color: Colors.black12,
+                          blurRadius: 10,
+                        )
+                      ],
+                      onCompleted: (v) {
+                        print("Completed");
+                      },
+                      // onTap: () {
+                      //   print("Pressed");
+                      // },
+                      onChanged: (value) {
+                        print(value);
+                        setState(() {
+                          currentText = value;
+                        });
+                      },
+                      beforeTextPaste: (text) {
+                        print("Allowing to paste $text");
+                        //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+                        //but you can show anything you want here, like your pop up saying wrong paste format or etc
+                        return true;
+                      },
+                    )),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: Text(
+                  hasError ? "*Please fill up all the cells properly" : "",
+                  style: TextStyle(
+                      color: Colors.teal,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                    text: "Didn't receive the code? ",
+                    style: TextStyle(color: Colors.black54, fontSize: 15),
+                    children: [
+                      TextSpan(
+                          text: " RESEND",
+                          recognizer: onTapRecognizer,
+                          style: TextStyle(
+                              color: Color(0xFF91D3B3),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16))
+                    ]),
+              ),
+              SizedBox(
+                height: 14,
+              ),
+              Container(
+                margin:
+                    const EdgeInsets.symmetric(vertical: 16.0, horizontal: 30),
+                child: ButtonTheme(
+                  height: 50,
+                  child: FlatButton(
+                    onPressed: () {
+                      formKey.currentState.validate();
+                      // conditions for validating
+                      if (currentText.length != 4 || currentText != "1234") {
+                        errorController.add(ErrorAnimationType
+                            .shake); // Triggering error shake animation
+                        setState(() {
+                          hasError = true;
+                        });
+                      } else {
+                        setState(() {
+                          hasError = false;
+                          scaffoldKey.currentState.showSnackBar(SnackBar(
+                            content: Text("Aye!!"),
+                            duration: Duration(seconds: 2),
+                          ));
+
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => MyHomePage()));
+
+
+                        });
+                      }
+                    },
+                    child: Center(
+                        child: Text(
+                      "VERIFY".toUpperCase(),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    )),
+                  ),
+                ),
+                decoration: BoxDecoration(
+                    color: Colors.green.shade300,
+                    borderRadius: BorderRadius.circular(5),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.green.shade200,
+                          offset: Offset(1, -2),
+                          blurRadius: 5),
+                      BoxShadow(
+                          color: Colors.green.shade200,
+                          offset: Offset(-1, 2),
+                          blurRadius: 5)
+                    ]),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  FlatButton(
+                    child: Text("Clear"),
+                    onPressed: () {
+                      textEditingController.clear();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text("Set Text"),
+                    onPressed: () {
+                      textEditingController.text = "123456";
+                    },
+                  ),
+                ],
               )
             ],
           ),
