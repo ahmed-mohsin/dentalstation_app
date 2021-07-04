@@ -76,14 +76,6 @@ activateNewUserService(context, phone, code) async {
   print(resMap['msg'].toString());
   if (resMap['code'] == 401) {
     EasyLoading.showToast('حدث خطأ اثناء التفعيل تأكد من كود التفعيل',toastPosition: EasyLoadingToastPosition.bottom);
-    // Scaffold.of(context).showSnackBar(SnackBar(
-    //     backgroundColor: darkTeal,
-    //     content: Directionality(
-    //         textDirection: TextDirection.rtl,
-    //         child: Text(
-    //           resMap['msg'].toString(),
-    //           style: TextStyle(color: Colors.white),
-    //         ))));
   }
   if (resMap['code'] == 200) {
     /*{"key":"success","data":{"user_phone":"1021888173","code":"1234"},"msg":"","code":200}*/
