@@ -52,8 +52,14 @@ class _RegistrationState extends State<Registration> {
         backgroundColor: darkTeal,
       ),
       body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+        height: MediaQuery
+            .of(context)
+            .size
+            .height,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width,
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -87,297 +93,338 @@ class _RegistrationState extends State<Registration> {
                 padding: const EdgeInsets.only(top: 4),
                 child: Directionality(
                   textDirection: TextDirection.ltr,
-                  child: Form(
-                      key: _formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 8),
-                            child: TextFormField(
-                              controller: userName,
-                              autofocus: false,
-                              style: TextStyle(
-                                  fontSize: 15.0, color: Colors.black),
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Username',
-                                filled: true,
-                                errorText:
-                                    _validate ? 'Value Can\'t Be Empty' : null,
-                                fillColor: Colors.grey[200],
-                                contentPadding: const EdgeInsets.only(
-                                    left: 14.0, bottom: 6.0, top: 8.0),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.teal),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 8),
-                            child: TextFormField(
-                              controller: userPhone,
-                              autofocus: false,
-                              style: TextStyle(
-                                  fontSize: 15.0, color: Colors.black),
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Phone Number',
-                                filled: true,
-                                errorText:
-                                    _validate ? 'Value Can\'t Be Empty' : null,
-                                fillColor: Colors.grey[200],
-                                contentPadding: const EdgeInsets.only(
-                                    left: 14.0, bottom: 6.0, top: 8.0),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.teal),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          // Padding(
-                          //   padding: EdgeInsets.symmetric(
-                          //       horizontal: 10, vertical: 8),
-                          //   child: TextFormField(
-                          //     controller: userAddress,
-                          //     autofocus: false,
-                          //     style: TextStyle(
-                          //         fontSize: 15.0, color: Colors.black),
-                          //     decoration: InputDecoration(
-                          //       border: InputBorder.none,
-                          //       hintText: 'Address',
-                          //       filled: true,
-                          //       errorText:
-                          //       _validate ? 'Value Can\'t Be Empty' : null,
-                          //       fillColor: Colors.grey[200],
-                          //       contentPadding: const EdgeInsets.only(
-                          //           left: 14.0, bottom: 6.0, top: 8.0),
-                          //       focusedBorder: OutlineInputBorder(
-                          //         borderSide: BorderSide(color: Colors.teal),
-                          //         borderRadius: BorderRadius.circular(10.0),
-                          //       ),
-                          //       enabledBorder: UnderlineInputBorder(
-                          //         borderSide: BorderSide(color: Colors.grey),
-                          //         borderRadius: BorderRadius.circular(10.0),
-                          //       ),
-                          //     ),
-                          //     validator: (value) {
-                          //       if (value.isEmpty) {
-                          //         return 'Please enter some text';
-                          //       }
-                          //       return null;
-                          //     },
-                          //   ),
-                          // ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 8),
-                            child: TextFormField(
-                              controller: userEmail,
-                              autofocus: false,
-                              style: TextStyle(
-                                  fontSize: 15.0, color: Colors.black),
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Email',
-                                filled: true,
-                                errorText:
-                                    _validate ? 'Value Can\'t Be Empty' : null,
-                                fillColor: Colors.grey[200],
-                                contentPadding: const EdgeInsets.only(
-                                    left: 14.0, bottom: 6.0, top: 8.0),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.teal),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 8),
-                            child: Stack(
-                              alignment: const Alignment(0, 0),
+                  child: Builder(
+                      builder: (BuildContext context) {
+                        return Form(
+                            key: _formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                TextFormField(
-                                  controller: password,
-                                  obscureText: _obscureText,
-                                  autofocus: false,
-                                  style: TextStyle(
-                                      fontSize: 15.0, color: Colors.black),
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'password',
-                                    filled: true,
-                                    errorText: _validate
-                                        ? 'Value Can\'t Be Empty'
-                                        : null,
-                                    fillColor: Colors.grey[200],
-                                    contentPadding: const EdgeInsets.only(
-                                        left: 14.0, bottom: 6.0, top: 8.0),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.teal),
-                                      borderRadius: BorderRadius.circular(10.0),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 8),
+                                  child: TextFormField(
+                                    controller: userName,
+                                    autofocus: false,
+                                    style: TextStyle(
+                                        fontSize: 15.0, color: Colors.black),
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'Username',
+                                      filled: true,
+                                      errorText:
+                                      _validate
+                                          ? 'Value Can\'t Be Empty'
+                                          : null,
+                                      fillColor: Colors.grey[200],
+                                      contentPadding: const EdgeInsets.only(
+                                          left: 14.0, bottom: 6.0, top: 8.0),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.teal),
+                                        borderRadius: BorderRadius.circular(
+                                            10.0),
+                                      ),
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(
+                                            10.0),
+                                      ),
                                     ),
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.grey),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return 'Please enter some text';
+                                      }
+                                      return null;
+                                    },
                                   ),
-                                  validator: (value) {
-                                    if (!(value.length > 6) &&
-                                        value.isNotEmpty) {
-                                      return "Password should contain more than 6 characters";
-                                    }
-                                    return null;
-                                  },
                                 ),
-                                Positioned(
-                                    right: 8,
-                                    child: GestureDetector(
-                                        onTap: _toggle,
-                                        child: Icon(_obscureText
-                                            ? Icons.visibility
-                                            : Icons.visibility_off)))
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 8),
+                                  child: TextFormField(
+                                    controller: userPhone,
+                                    autofocus: false,
+                                    style: TextStyle(
+                                        fontSize: 15.0, color: Colors.black),
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'Phone Number',
+                                      filled: true,
+                                      errorText:
+                                      _validate
+                                          ? 'Value Can\'t Be Empty'
+                                          : null,
+                                      fillColor: Colors.grey[200],
+                                      contentPadding: const EdgeInsets.only(
+                                          left: 14.0, bottom: 6.0, top: 8.0),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.teal),
+                                        borderRadius: BorderRadius.circular(
+                                            10.0),
+                                      ),
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(
+                                            10.0),
+                                      ),
+                                    ),
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return 'Please enter some text';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                                // Padding(
+                                //   padding: EdgeInsets.symmetric(
+                                //       horizontal: 10, vertical: 8),
+                                //   child: TextFormField(
+                                //     controller: userAddress,
+                                //     autofocus: false,
+                                //     style: TextStyle(
+                                //         fontSize: 15.0, color: Colors.black),
+                                //     decoration: InputDecoration(
+                                //       border: InputBorder.none,
+                                //       hintText: 'Address',
+                                //       filled: true,
+                                //       errorText:
+                                //       _validate ? 'Value Can\'t Be Empty' : null,
+                                //       fillColor: Colors.grey[200],
+                                //       contentPadding: const EdgeInsets.only(
+                                //           left: 14.0, bottom: 6.0, top: 8.0),
+                                //       focusedBorder: OutlineInputBorder(
+                                //         borderSide: BorderSide(color: Colors.teal),
+                                //         borderRadius: BorderRadius.circular(10.0),
+                                //       ),
+                                //       enabledBorder: UnderlineInputBorder(
+                                //         borderSide: BorderSide(color: Colors.grey),
+                                //         borderRadius: BorderRadius.circular(10.0),
+                                //       ),
+                                //     ),
+                                //     validator: (value) {
+                                //       if (value.isEmpty) {
+                                //         return 'Please enter some text';
+                                //       }
+                                //       return null;
+                                //     },
+                                //   ),
+                                // ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 8),
+                                  child: TextFormField(
+                                    controller: userEmail,
+                                    autofocus: false,
+                                    style: TextStyle(
+                                        fontSize: 15.0, color: Colors.black),
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'Email',
+                                      filled: true,
+                                      errorText:
+                                      _validate
+                                          ? 'Value Can\'t Be Empty'
+                                          : null,
+                                      fillColor: Colors.grey[200],
+                                      contentPadding: const EdgeInsets.only(
+                                          left: 14.0, bottom: 6.0, top: 8.0),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.teal),
+                                        borderRadius: BorderRadius.circular(
+                                            10.0),
+                                      ),
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(
+                                            10.0),
+                                      ),
+                                    ),
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return 'Please enter some text';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 8),
+                                  child: Stack(
+                                    alignment: const Alignment(0, 0),
+                                    children: <Widget>[
+                                      TextFormField(
+                                        controller: password,
+                                        obscureText: _obscureText,
+                                        autofocus: false,
+                                        style: TextStyle(
+                                            fontSize: 15.0,
+                                            color: Colors.black),
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: 'password',
+                                          filled: true,
+                                          errorText: _validate
+                                              ? 'Value Can\'t Be Empty'
+                                              : null,
+                                          fillColor: Colors.grey[200],
+                                          contentPadding: const EdgeInsets.only(
+                                              left: 14.0,
+                                              bottom: 6.0,
+                                              top: 8.0),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide:
+                                            BorderSide(color: Colors.teal),
+                                            borderRadius: BorderRadius.circular(
+                                                10.0),
+                                          ),
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide:
+                                            BorderSide(color: Colors.grey),
+                                            borderRadius: BorderRadius.circular(
+                                                10.0),
+                                          ),
+                                        ),
+                                        validator: (value) {
+                                          if (!(value.length > 6) &&
+                                              value.isNotEmpty) {
+                                            return "Password should contain more than 6 characters";
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      Positioned(
+                                          right: 8,
+                                          child: GestureDetector(
+                                              onTap: _toggle,
+                                              child: Icon(_obscureText
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off)))
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 8),
+                                  child: Stack(
+                                    alignment: const Alignment(0, 0),
+                                    children: <Widget>[
+                                      TextFormField(
+                                        controller: confirmPassword,
+                                        obscureText: _obscureText,
+                                        autofocus: false,
+                                        style: TextStyle(
+                                            fontSize: 15.0,
+                                            color: Colors.black),
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: 'Confirm Password',
+                                          filled: true,
+                                          errorText: _validate
+                                              ? 'Value Can\'t Be Empty'
+                                              : null,
+                                          fillColor: Colors.grey[200],
+                                          contentPadding: const EdgeInsets.only(
+                                              left: 14.0,
+                                              bottom: 6.0,
+                                              top: 8.0),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide:
+                                            BorderSide(color: Colors.teal),
+                                            borderRadius: BorderRadius.circular(
+                                                10.0),
+                                          ),
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide:
+                                            BorderSide(color: Colors.grey),
+                                            borderRadius: BorderRadius.circular(
+                                                10.0),
+                                          ),
+                                        ),
+                                        validator: (value) {
+                                          if (value.isEmpty) return 'Empty';
+                                          if (value != password.text)
+                                            return 'The two passwords are not matched';
+                                          return null;
+                                        },
+                                      ),
+                                      Positioned(
+                                          right: 8,
+                                          child: GestureDetector(
+                                              onTap: _toggle,
+                                              child: Icon(_obscureText
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off)))
+                                    ],
+                                  ),
+                                ),
+                                // CheckboxListTile(
+                                //   activeColor: Colors.tealAccent,
+                                //   title: Text(
+                                //     "Remember Me",
+                                //     style: TextStyle(
+                                //         fontFamily: 'arn', color: Colors.grey),
+                                //   ),
+                                //   value: rememberMeCheckValue,
+                                //   onChanged: (newValue) {
+                                //     setState(() {
+                                //       rememberMeCheckValue = newValue;
+                                //       print('remember me >> ' + newValue.toString());
+                                //     });
+                                //   },
+                                //   controlAffinity: ListTileControlAffinity
+                                //       .leading, //  <-- leading Checkbox
+                                // ),
+                                Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 50, horizontal: 10),
+                                    child: Container(
+                                      height: 50,
+                                      width: double.infinity,
+                                      child: RaisedButton(
+                                        color: darkTeal,
+                                        onPressed: () {
+                                          // Validate returns true if the form is valid, or false
+                                          // otherwise.
+                                          if (_formKey.currentState
+                                              .validate()) {
+                                            registerNewUserService(
+                                                context,
+                                                userPhone.text,
+                                                userName.text,
+                                                userEmail.text,
+                                                password.text,
+                                                confirmPassword.text);
+                                          } else {
+                                            Scaffold.of(context).showSnackBar(
+                                                SnackBar(
+                                                    content: Text(
+                                                        'Fill Required TextFields')));
+                                          }
+                                        },
+                                        child: Text(
+                                          'Submit',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            new BorderRadius.circular(18.0),
+                                            side: BorderSide(
+                                                color: Colors.green)),
+                                      ),
+                                    )),
                               ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 8),
-                            child: Stack(
-                              alignment: const Alignment(0, 0),
-                              children: <Widget>[
-                                TextFormField(
-                                  controller: confirmPassword,
-                                  obscureText: _obscureText,
-                                  autofocus: false,
-                                  style: TextStyle(
-                                      fontSize: 15.0, color: Colors.black),
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Confirm Password',
-                                    filled: true,
-                                    errorText: _validate
-                                        ? 'Value Can\'t Be Empty'
-                                        : null,
-                                    fillColor: Colors.grey[200],
-                                    contentPadding: const EdgeInsets.only(
-                                        left: 14.0, bottom: 6.0, top: 8.0),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.teal),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.grey),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                  ),
-                                  validator: (value) {
-                                    if (value.isEmpty) return 'Empty';
-                                    if (value != password.text)
-                                      return 'The two passwords are not matched';
-                                    return null;
-                                  },
-                                ),
-                                Positioned(
-                                    right: 8,
-                                    child: GestureDetector(
-                                        onTap: _toggle,
-                                        child: Icon(_obscureText
-                                            ? Icons.visibility
-                                            : Icons.visibility_off)))
-                              ],
-                            ),
-                          ),
-                          // CheckboxListTile(
-                          //   activeColor: Colors.tealAccent,
-                          //   title: Text(
-                          //     "Remember Me",
-                          //     style: TextStyle(
-                          //         fontFamily: 'arn', color: Colors.grey),
-                          //   ),
-                          //   value: rememberMeCheckValue,
-                          //   onChanged: (newValue) {
-                          //     setState(() {
-                          //       rememberMeCheckValue = newValue;
-                          //       print('remember me >> ' + newValue.toString());
-                          //     });
-                          //   },
-                          //   controlAffinity: ListTileControlAffinity
-                          //       .leading, //  <-- leading Checkbox
-                          // ),
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 50, horizontal: 10),
-                              child: Container(
-                                height: 50,
-                                width: double.infinity,
-                                child: RaisedButton(
-                                  color: darkTeal,
-                                  onPressed: () {
-                                    // Validate returns true if the form is valid, or false
-                                    // otherwise.
-                                    if (_formKey.currentState.validate()) {
-                                      registerNewUserService(context);
-                                    } else {
-                                      Scaffold.of(context).showSnackBar(
-                                          SnackBar(
-                                              content: Text(
-                                                  'Fill Required TextFields')));
-                                    }
-                                  },
-                                  child: Text(
-                                    'Submit',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(18.0),
-                                      side: BorderSide(color: Colors.green)),
-                                ),
-                              )),
-                        ],
-                      )),
+                            ));
+
+                      }
+                  ),
                 ),
               )
             ],

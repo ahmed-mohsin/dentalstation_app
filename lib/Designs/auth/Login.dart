@@ -1,6 +1,7 @@
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/auth/ForgetPassword.dart';
 import 'package:dentalstation_app/Designs/auth/PinCodeVerificationScreen.dart';
+import 'package:dentalstation_app/Designs/auth/authServices.dart';
 import 'package:flutter/material.dart';
 
 class LogginScreen extends StatefulWidget {
@@ -61,7 +62,7 @@ class _LogginScreenState extends State<LogginScreen> {
                   padding: const EdgeInsets.only(top: 4),
                   child: Directionality(
                     textDirection: TextDirection.ltr,
-                    child: Form(
+                    child:Builder(builder: (context){return Form(
                         key: _formKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -229,21 +230,21 @@ class _LogginScreenState extends State<LogginScreen> {
                                           left: 14.0, bottom: 6.0, top: 8.0),
                                       focusedBorder: OutlineInputBorder(
                                         borderSide:
-                                            BorderSide(color: Colors.teal),
+                                        BorderSide(color: Colors.teal),
                                         borderRadius:
-                                            BorderRadius.circular(10.0),
+                                        BorderRadius.circular(10.0),
                                       ),
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide:
-                                            BorderSide(color: Colors.grey),
+                                        BorderSide(color: Colors.grey),
                                         borderRadius:
-                                            BorderRadius.circular(10.0),
+                                        BorderRadius.circular(10.0),
                                       ),
                                     ),
                                     validator: (value) {
-                                      if (!(value.length > 6) &&
+                                      if (!(value.length > 5) &&
                                           value.isNotEmpty) {
-                                        return "Password should contain more than 6 characters";
+                                        return "Password should contain more than 5 characters";
                                       }
                                       return null;
                                     },
@@ -328,7 +329,7 @@ class _LogginScreenState extends State<LogginScreen> {
                             SizedBox(height: 40,),
                             Padding(
                                 padding: const EdgeInsets.symmetric(
-                                     horizontal: 10),
+                                    horizontal: 10),
                                 child: Container(
                                   height: 50,
                                   width: double.infinity,
@@ -340,18 +341,8 @@ class _LogginScreenState extends State<LogginScreen> {
                                       if (_formKey.currentState
                                           .validate()) {
                                         // If the form is valid, display a Snackbar.
+                                        loginService(context, userPhone.text, password.text);
 
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    PinCodeVerificationScreen(
-                                                        '201553969051','1234')));
-
-                                        Scaffold.of(context).showSnackBar(
-                                            SnackBar(
-                                                content: Text(
-                                                    'Processing Data')));
                                       } else {
                                         Scaffold.of(context).showSnackBar(
                                             SnackBar(
@@ -365,7 +356,7 @@ class _LogginScreenState extends State<LogginScreen> {
                                     ),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            new BorderRadius.circular(18.0),
+                                        new BorderRadius.circular(18.0),
                                         side: BorderSide(
                                             color: Colors.green)),
                                   ),
@@ -380,7 +371,7 @@ class _LogginScreenState extends State<LogginScreen> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 ForgePasswordScreen(
-                                                    )));
+                                                )));
 
                                   },child: Text('Forget Password',style: TextStyle(fontFamily: 'arn',color: Colors.grey),)),
                                   Text('Create New account',style: TextStyle(fontFamily: 'arn',color: darkTeal),)
@@ -389,7 +380,7 @@ class _LogginScreenState extends State<LogginScreen> {
                             ),
 
                           ],
-                        )),
+                        ));},) ,
                   ),
                 )
               ],
@@ -400,3 +391,4 @@ class _LogginScreenState extends State<LogginScreen> {
     );
   }
 }
+/**/

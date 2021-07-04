@@ -69,26 +69,38 @@ class MyAccount extends StatelessWidget {
               ),
             ),
           ),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: InkWell(
+          //     onTap: () {
+          //       registerNewUserService(context);
+          //     },
+          //     child: Text(
+          //       'Create New Account function',
+          //       style: TextStyle(color: Colors.teal),
+          //     ),
+          //   ),
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: InkWell(
+          //     onTap: () {
+          //       activateNewUserService(context,'01021888175','1234');
+          //     },
+          //     child: Text(
+          //       'Activate New Account function',
+          //       style: TextStyle(color: Colors.teal),
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
               onTap: () {
-                registerNewUserService(context);
+                loginService(context,'01021888178','1234567');
               },
               child: Text(
-                'Create New Account function',
-                style: TextStyle(color: Colors.teal),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              onTap: () {
-                registerNewUserActivationService(context,'01021888175','1234');
-              },
-              child: Text(
-                'Activate New Account function',
+                'Login',
                 style: TextStyle(color: Colors.teal),
               ),
             ),
