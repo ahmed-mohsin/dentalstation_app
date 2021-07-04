@@ -16,19 +16,7 @@ class MyAccount extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Registration()));
-              },
-              child: Text(
-                'Create New Account',
-                style: TextStyle(color: Colors.teal),
-              ),
-            ),
-          ),
+
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
@@ -44,19 +32,7 @@ class MyAccount extends StatelessWidget {
           ),
           //ChangePassWord
 
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ResetPassWord()));
-              },
-              child: Text(
-                'ResetPassWord',
-                style: TextStyle(color: Colors.teal),
-              ),
-            ),
-          ),
+
           // Padding(
           //   padding: const EdgeInsets.all(8.0),
           //   child: InkWell(
@@ -81,18 +57,7 @@ class MyAccount extends StatelessWidget {
           //     ),
           //   ),
           // ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              onTap: () {
-                loginService(context,'01021888178','1234567');
-              },
-              child: Text(
-                'Login',
-                style: TextStyle(color: Colors.teal),
-              ),
-            ),
-          ),
+
         ],
       ),
     );
