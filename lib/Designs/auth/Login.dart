@@ -1,6 +1,7 @@
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/auth/ForgetPassword.dart';
 import 'package:dentalstation_app/Designs/auth/PinCodeVerificationScreen.dart';
+import 'package:dentalstation_app/Designs/auth/Registration.dart';
 import 'package:dentalstation_app/Designs/auth/authServices.dart';
 import 'package:flutter/material.dart';
 
@@ -374,7 +375,15 @@ class _LogginScreenState extends State<LogginScreen> {
                                                 )));
 
                                   },child: Text('Forget Password',style: TextStyle(fontFamily: 'arn',color: Colors.grey),)),
-                                  Text('Create New account',style: TextStyle(fontFamily: 'arn',color: darkTeal),)
+                                  InkWell(onTap: (){
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Registration(
+                                                )));
+
+                                  },child: Text('Create New account',style: TextStyle(fontFamily: 'arn',color: darkTeal),))
                                 ],
                               ),
                             ),
