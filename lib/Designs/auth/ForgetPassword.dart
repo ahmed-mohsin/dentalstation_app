@@ -1,5 +1,6 @@
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/auth/PinCodeVerificationScreen.dart';
+import 'package:dentalstation_app/Designs/auth/authServices.dart';
 import 'package:flutter/material.dart';
 
 class ForgePasswordScreen extends StatefulWidget {
@@ -340,17 +341,8 @@ class _ForgePasswordScreenState extends State<ForgePasswordScreen> {
                                           .validate()) {
                                         // If the form is valid, display a Snackbar.
 
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    PinCodeVerificationScreen(
-                                                        '201553969051')));
+                                        forgetPasswordService(context, userPhone.text);
 
-                                        Scaffold.of(context).showSnackBar(
-                                            SnackBar(
-                                                content: Text(
-                                                    'Processing Data')));
                                       } else {
                                         Scaffold.of(context).showSnackBar(
                                             SnackBar(

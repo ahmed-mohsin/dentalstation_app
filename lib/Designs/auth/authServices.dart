@@ -3,14 +3,14 @@ import 'dart:io';
 
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/HomePage/HomePageScreen.dart';
+import 'package:dentalstation_app/Designs/auth/ChangePassword.dart';
 import 'package:dentalstation_app/Designs/auth/PinCodeVerificationScreen.dart';
 import 'package:dentalstation_app/constants/baseUrl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:animated_dialog_box/animated_dialog_box.dart';
 
-registerNewUserService(
-    context, phone, userName, userMail, passWord, confirmedPassword) async {
+registerNewUserService(context, phone, userName, userMail, passWord, confirmedPassword) async {
   String serviceUrl = baseUrl + 'client_sign_up';
   EasyLoading.show(status: 'loading...');
   HttpClient httpClient = new HttpClient();
@@ -51,11 +51,12 @@ registerNewUserService(
         context,
         MaterialPageRoute(
             builder: (context) => PinCodeVerificationScreen(
-                resMap['data']['user_phone'],)));
+                  resMap['data']['user_phone'],
+                )));
   }
 }
 
-activateNewUserService(context, phone, code) async {
+activateNewUserService(context, phone, code,type) async {
   String serviceUrl = baseUrl + 'user_activation';
   EasyLoading.show(status: 'loading...');
   HttpClient httpClient = new HttpClient();
@@ -75,16 +76,25 @@ activateNewUserService(context, phone, code) async {
   print(resMap['code'].toString());
   print(resMap['msg'].toString());
   if (resMap['code'] == 401) {
-    EasyLoading.showToast('حدث خطأ اثناء التفعيل تأكد من كود التفعيل',toastPosition: EasyLoadingToastPosition.bottom);
+    EasyLoading.showToast('حدث خطأ اثناء التفعيل تأكد من كود التفعيل',
+        toastPosition: EasyLoadingToastPosition.bottom);
   }
   if (resMap['code'] == 200) {
     /*{"key":"success","data":{"user_phone":"1021888173","code":"1234"},"msg":"","code":200}*/
-    EasyLoading.showSuccess('تمت عملية تفعيل التسجيل بنجاح');
-    print(resMap['data']['name']);
-    EasyLoading.showSuccess('تم تفعيل الحساب بنجاح');
-    print(resMap['data']['name']);
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => MyHomePage()));
+    if(type=='cpw'){
+      EasyLoading.showToast('ادخل باسورد جديدة',
+          toastPosition: EasyLoadingToastPosition.bottom);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => ChangePassWord(phone,code)));
+    }else{
+      EasyLoading.showSuccess('تمت عملية تفعيل التسجيل بنجاح');
+      print(resMap['data']['name']);
+      EasyLoading.showSuccess('تم تفعيل الحساب بنجاح');
+      print(resMap['data']['name']);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => MyHomePage()));
+    }
+
   }
 }
 
@@ -130,12 +140,12 @@ resendSMSService(context, phone) async {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => PinCodeVerificationScreen(
-                phone)));
+            builder: (context) => PinCodeVerificationScreen(phone)));
     // Navigator.push(
     //     context, MaterialPageRoute(builder: (context) => MyHomePage()));
   }
 }
+
 loginService(context, phone, passWord) async {
   String serviceUrl = baseUrl + 'sign_in';
   EasyLoading.show(status: 'loading...');
@@ -174,7 +184,11 @@ loginService(context, phone, passWord) async {
     //           style: TextStyle(color: Colors.white),
     //         ))));
     await animated_dialog_box.showInOutDailog(
-        title: Center(child: Text("حساب لم يتم تفعيله",style: TextStyle(color: darkTeal,fontFamily: 'CeraRound'),)),
+        title: Center(
+            child: Text(
+          "حساب لم يتم تفعيله",
+          style: TextStyle(color: darkTeal, fontFamily: 'CeraRound'),
+        )),
         // IF YOU WANT TO ADD
         context: context,
         firstButton: MaterialButton(
@@ -196,7 +210,7 @@ loginService(context, phone, passWord) async {
           color: darkTeal,
           child: Text(
             'تفعيل الآن',
-            style: TextStyle(color: Colors.white,fontFamily: 'CeraRound'),
+            style: TextStyle(color: Colors.white, fontFamily: 'CeraRound'),
           ),
           onPressed: () {
             resendSMSService(context, phone);
@@ -210,7 +224,8 @@ loginService(context, phone, passWord) async {
         // IF YOU WANT TO ADD ICON
         yourWidget: Container(
           child: Text(
-            'هل تريد تفعيل الحساب عن طريق رسالة ستصلك علي هاتفك الآن ؟',textDirection: TextDirection.rtl,
+            'هل تريد تفعيل الحساب عن طريق رسالة ستصلك علي هاتفك الآن ؟',
+            textDirection: TextDirection.rtl,
             style: TextStyle(fontFamily: 'CeraRound', color: Colors.black),
           ),
         ));
@@ -228,5 +243,77 @@ loginService(context, phone, passWord) async {
               resMap['msg'].toString(),
               style: TextStyle(color: Colors.white),
             ))));
+  }
+}
+
+forgetPasswordService(context, phone) async {
+  String serviceUrl = baseUrl + 'forget_password';
+  EasyLoading.show(status: 'loading...');
+  HttpClient httpClient = new HttpClient();
+  HttpClientRequest request = await httpClient.postUrl(Uri.parse(serviceUrl));
+  request.headers.set('content-type', 'application/json');
+  request.add(utf8.encode(json.encode({
+    'phone': phone,
+    'type': "activation",
+  })));
+  HttpClientResponse response = await request.close();
+  String reply = await response.transform(utf8.decoder).join();
+  print(reply);
+  httpClient.close();
+  Map<String, dynamic> resMap = json.decode(reply);
+  print(resMap['msg'].toString());
+  if (resMap['code'] == 401) {
+    EasyLoading.showToast('هذا الرقم غير مسجل من قبل',
+        toastPosition: EasyLoadingToastPosition.bottom);
+  }
+  if (resMap['code'] == 200) {
+    /*{"key":"success","data":{"user_phone":"1021888173","code":"1234"},"msg":"","code":200}*/
+
+    EasyLoading.showToast('تم ارسال رقم التفعيل في رسالة لرقم موبايلك',
+        toastPosition: EasyLoadingToastPosition.bottom);
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => PinCodeVerificationScreen(phone,type: 'cpw',)));
+    // Navigator.push(
+    //     context, MaterialPageRoute(builder: (context) => MyHomePage()));
+  }
+}
+
+saveNewPassword(context, phone,resetCode,password,passwordConfirmation) async {
+  String serviceUrl = baseUrl + 'save_new_password';
+  EasyLoading.show(status: 'loading...');
+  HttpClient httpClient = new HttpClient();
+  HttpClientRequest request = await httpClient.postUrl(Uri.parse(serviceUrl));
+  request.headers.set('content-type', 'application/json');
+  request.add(utf8.encode(json.encode({
+    'reset_code': resetCode,
+    'password': password,
+    'password_confirmation': passwordConfirmation,
+    'phone': phone,
+  })));
+  HttpClientResponse response = await request.close();
+  String reply = await response.transform(utf8.decoder).join();
+  print(reply);
+  httpClient.close();
+  Map<String, dynamic> resMap = json.decode(reply);
+  print(resMap['msg'].toString());
+  if (resMap['code'] == 401) {
+    EasyLoading.showToast(resMap['msg'].toString(),
+        toastPosition: EasyLoadingToastPosition.bottom);
+  }
+  if (resMap['code'] == 200) {
+    /*{"key":"success","data":{"user_phone":"1021888173","code":"1234"},"msg":"","code":200}*/
+
+    EasyLoading.showToast('تم تغيير الباسورد بنجاح',
+        toastPosition: EasyLoadingToastPosition.bottom);
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MyHomePage()));
+    // Navigator.push(
+    //     context, MaterialPageRoute(builder: (context) => MyHomePage()));
   }
 }

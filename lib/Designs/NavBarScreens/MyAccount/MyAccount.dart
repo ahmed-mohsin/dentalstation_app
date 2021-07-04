@@ -43,19 +43,7 @@ class MyAccount extends StatelessWidget {
             ),
           ),
           //ChangePassWord
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ChangePassWord()));
-              },
-              child: Text(
-                'ChangePassWord',
-                style: TextStyle(color: Colors.teal),
-              ),
-            ),
-          ),
+
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: InkWell(

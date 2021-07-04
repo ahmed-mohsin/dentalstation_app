@@ -1,11 +1,13 @@
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/auth/PinCodeVerificationScreen.dart';
+import 'package:dentalstation_app/Designs/auth/authServices.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class ChangePassWord extends StatefulWidget {
-  const ChangePassWord({
-    Key key,
-  }) : super(key: key);
+  final String phone , code;
+
+  ChangePassWord(this.phone, this.code);
 
   @override
   _ChangePassWordState createState() => _ChangePassWordState();
@@ -13,10 +15,7 @@ class ChangePassWord extends StatefulWidget {
 
 class _ChangePassWordState extends State<ChangePassWord> {
   bool _obscureText, rememberMeCheckValue;
-  // final TextEditingController userName = new TextEditingController();
-  // final TextEditingController userPhone = new TextEditingController();
-  // final TextEditingController userAddress = new TextEditingController();
-  // final TextEditingController userEmail = new TextEditingController();
+
   final TextEditingController password = new TextEditingController();
   final TextEditingController confirmPassword = new TextEditingController();
   bool _validate = false;
@@ -352,23 +351,11 @@ class _ChangePassWordState extends State<ChangePassWord> {
                                     // otherwise.
                                     if (_formKey.currentState.validate()) {
                                       // If the form is valid, display a Snackbar.
-
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  PinCodeVerificationScreen(
-                                                      '201553969051')));
-
-                                      Scaffold.of(context).showSnackBar(
-                                          SnackBar(
-                                              content:
-                                              Text('Processing Data')));
+                                      saveNewPassword(context,widget.phone,widget.code,password.text,confirmPassword.text);
                                     } else {
-                                      Scaffold.of(context).showSnackBar(
-                                          SnackBar(
-                                              content: Text(
-                                                  'Fill Required TextFields')));
+
+                                      EasyLoading.showToast('Fill Required TextFields',
+                                          toastPosition: EasyLoadingToastPosition.bottom);
                                     }
                                   },
                                   child: Text(

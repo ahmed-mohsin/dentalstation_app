@@ -9,10 +9,10 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 class PinCodeVerificationScreen extends StatefulWidget {
   final String phoneNumber;
-  //final String code;
+  final String type;
 
 
-  PinCodeVerificationScreen(this.phoneNumber);
+  PinCodeVerificationScreen(this.phoneNumber,{this.type});
 
   @override
   _PinCodeVerificationScreenState createState() =>
@@ -217,7 +217,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                       });
                     } else {
                       activateNewUserService(
-                          context, widget.phoneNumber, pinCode.text);
+                          context, widget.phoneNumber, pinCode.text,widget.type=='cpw'?'cpw':'new',);
                       setState(() {
                         hasError = false;
                       });
