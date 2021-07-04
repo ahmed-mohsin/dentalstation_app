@@ -358,7 +358,7 @@ class _ChangePassWordState extends State<ChangePassWord> {
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   PinCodeVerificationScreen(
-                                                      '201553969051','1234')));
+                                                      '201553969051')));
 
                                       Scaffold.of(context).showSnackBar(
                                           SnackBar(

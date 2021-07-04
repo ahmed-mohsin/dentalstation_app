@@ -51,7 +51,7 @@ registerNewUserService(
         context,
         MaterialPageRoute(
             builder: (context) => PinCodeVerificationScreen(
-                resMap['data']['user_phone'], resMap['data']['code'])));
+                resMap['data']['user_phone'],)));
   }
 }
 
@@ -75,15 +75,15 @@ activateNewUserService(context, phone, code) async {
   print(resMap['code'].toString());
   print(resMap['msg'].toString());
   if (resMap['code'] == 401) {
-    EasyLoading.showError('فشلت عملية التسجيل');
-    Scaffold.of(context).showSnackBar(SnackBar(
-        backgroundColor: darkTeal,
-        content: Directionality(
-            textDirection: TextDirection.rtl,
-            child: Text(
-              resMap['msg'].toString(),
-              style: TextStyle(color: Colors.white),
-            ))));
+    EasyLoading.showToast('حدث خطأ اثناء التفعيل تأكد من كود التفعيل',toastPosition: EasyLoadingToastPosition.bottom);
+    // Scaffold.of(context).showSnackBar(SnackBar(
+    //     backgroundColor: darkTeal,
+    //     content: Directionality(
+    //         textDirection: TextDirection.rtl,
+    //         child: Text(
+    //           resMap['msg'].toString(),
+    //           style: TextStyle(color: Colors.white),
+    //         ))));
   }
   if (resMap['code'] == 200) {
     /*{"key":"success","data":{"user_phone":"1021888173","code":"1234"},"msg":"","code":200}*/
@@ -96,7 +96,7 @@ activateNewUserService(context, phone, code) async {
   }
 }
 
-resendActivationService(context, phone) async {
+resendSMSService(context, phone) async {
   String serviceUrl = baseUrl + 'resend_code';
   EasyLoading.show(status: 'loading...');
   HttpClient httpClient = new HttpClient();
@@ -111,7 +111,6 @@ resendActivationService(context, phone) async {
   print(reply);
   httpClient.close();
   Map<String, dynamic> resMap = json.decode(reply);
-  print(resMap['code'].toString());
   print(resMap['msg'].toString());
   if (resMap['code'] == 401) {
     EasyLoading.dismiss();
@@ -136,7 +135,11 @@ resendActivationService(context, phone) async {
               'تم ارسال رقم التفعيل في رسالة لرقم موبايلك',
               style: TextStyle(color: Colors.white),
             ))));
-
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => PinCodeVerificationScreen(
+                phone)));
     // Navigator.push(
     //     context, MaterialPageRoute(builder: (context) => MyHomePage()));
   }
@@ -204,7 +207,7 @@ loginService(context, phone, passWord) async {
             style: TextStyle(color: Colors.white,fontFamily: 'CeraRound'),
           ),
           onPressed: () {
-            resendActivationService(context, phone);
+            resendSMSService(context, phone);
           },
         ),
         icon: Icon(

@@ -9,9 +9,10 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 class PinCodeVerificationScreen extends StatefulWidget {
   final String phoneNumber;
-  final String code;
+  //final String code;
 
-  PinCodeVerificationScreen(this.phoneNumber, this.code);
+
+  PinCodeVerificationScreen(this.phoneNumber);
 
   @override
   _PinCodeVerificationScreenState createState() =>
@@ -21,7 +22,7 @@ class PinCodeVerificationScreen extends StatefulWidget {
 class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
   var onTapRecognizer;
 
-  TextEditingController textEditingController = TextEditingController();
+  TextEditingController pinCode = TextEditingController();
 
   // ..text = "123456";
 
@@ -137,7 +138,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                         backgroundColor: Colors.white,
                         enableActiveFill: true,
                         errorAnimationController: errorController,
-                        controller: textEditingController,
+                        controller: pinCode,
                         keyboardType: TextInputType.number,
                         boxShadows: [
                           BoxShadow(
@@ -208,8 +209,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                   onPressed: () {
                     formKey.currentState.validate();
                     // conditions for validating
-                    if (currentText.length != 4 ||
-                        currentText != widget.code) {
+                    if (currentText.length != 4 ) {
                       errorController.add(ErrorAnimationType
                           .shake); // Triggering error shake animation
                       setState(() {
@@ -217,7 +217,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                       });
                     } else {
                       activateNewUserService(
-                          context, widget.phoneNumber, widget.code);
+                          context, widget.phoneNumber, pinCode.text);
                       setState(() {
                         hasError = false;
                       });
@@ -256,13 +256,13 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                 FlatButton(
                   child: Text("Clear"),
                   onPressed: () {
-                    textEditingController.clear();
+                    pinCode.clear();
                   },
                 ),
                 FlatButton(
                   child: Text("Set Text"),
                   onPressed: () {
-                    textEditingController.text = "123456";
+                    pinCode.text = "123456";
                   },
                 ),
               ],
