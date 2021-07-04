@@ -1,16 +1,9 @@
-import 'dart:async';
-
 import 'package:dentalstation_app/Designs/auth/ChangePassword.dart';
 import 'package:dentalstation_app/Designs/auth/Login.dart';
 import 'package:dentalstation_app/Designs/auth/Registration.dart';
 import 'package:dentalstation_app/Designs/auth/ResetPassWord.dart';
 import 'package:dentalstation_app/Designs/auth/authServices.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
-
-import '../../Decorations/hex.dart';
-import '../../HomePage/HomePageScreen.dart';
 
 class MyAccount extends StatelessWidget {
   @override
@@ -80,10 +73,22 @@ class MyAccount extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
               onTap: () {
-                registerNewUser(context);
+                registerNewUserService(context);
               },
               child: Text(
                 'Create New Account function',
+                style: TextStyle(color: Colors.teal),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+              onTap: () {
+                registerNewUserActivationService(context,'01021888175','1234');
+              },
+              child: Text(
+                'Activate New Account function',
                 style: TextStyle(color: Colors.teal),
               ),
             ),

@@ -358,7 +358,7 @@ class _RegistrationState extends State<Registration> {
                                     // Validate returns true if the form is valid, or false
                                     // otherwise.
                                     if (_formKey.currentState.validate()) {
-                                      registerNewUser(context);
+                                      registerNewUserService(context);
                                     } else {
                                       Scaffold.of(context).showSnackBar(
                                           SnackBar(

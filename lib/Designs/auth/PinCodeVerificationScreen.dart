@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/HomePage/HomePageScreen.dart';
+import 'package:dentalstation_app/Designs/auth/authServices.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -212,19 +213,19 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                           hasError = true;
                         });
                       } else {
+                        registerNewUserActivationService(context,widget.phoneNumber,widget.code);
                         setState(() {
-                          hasError = false;
-                          scaffoldKey.currentState.showSnackBar(SnackBar(
-                            content: Text("Aye!!"),
-                            duration: Duration(seconds: 2),
-                          ));
-
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => MyHomePage()));
-
-
-                        });
+                          hasError = false;});
                       }
+                      final snackBar =SnackBar(
+                          backgroundColor: darkTeal,
+                          content: Directionality(
+                              textDirection: TextDirection.rtl,
+                              child: Text(
+                                'تم تفعيل الحساب بنجاح',
+                                style: TextStyle(color: Colors.white),
+                              )));
+                      scaffoldKey.currentState.showSnackBar(snackBar);
                     },
                     child: Center(
                         child: Text(
