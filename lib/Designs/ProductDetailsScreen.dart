@@ -16,6 +16,8 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  int q ;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,90 +65,42 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       ),
                     ),
                     Container(
-                        color: Colors.white,
-                        width: MediaQuery.of(context).size.width,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 4),
-                                child: Text(
-                                  productList[2]['name'],
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 15,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 3),
-                                child: Text(
-                                  productList[2]['title'],
-                                  style: TextStyle(
+                      color: Colors.white,
+                      width: MediaQuery.of(context).size.width,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 6),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 4),
+                              child: Text(
+                                productList[2]['name'],
+                                style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 15,
                                     fontFamily: 'Poppins',
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                productList[2]['price'].toString() + ' EGP',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontFamily: 'Poppins',
                                     fontWeight: FontWeight.bold),
                               ),
-                              Row(
-                                children: [
-                                  Text(
-                                    productList[2]['oldPrice'].toString() +
-                                        ' EGP',
-                                    style: TextStyle(
-                                        color: Colors.grey,
-                                        decoration: TextDecoration.lineThrough),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color: darkTeal.withAlpha(40)),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          '${((productList[2]['oldPrice'] - productList[2]['price']) / productList[2]['oldPrice'] * 100).round()}% OFF',
-                                          style: TextStyle(
-                                              color: darkTeal,
-                                              fontWeight: FontWeight.w500,
-                                              fontFamily: 'Poppins',
-                                              fontSize: 14),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  IconButton(
-                                      iconSize: 25,
-                                      icon: Icon(
-                                        LineIcons.heart,
-                                        color: Colors.black87,
-                                      ),
-                                      onPressed: () {
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (_) => SwipeFeedPage()));
-                                      }),
-                                ],
-                              )
-                            ],
-                          ),
-                        )),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 3),
+                              child: Text(
+                                productList[2]['title'],
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontFamily: 'Poppins',
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Variations('Small Size , Red Color , Powder Free'),
+                    Variations('Xlarge , Blue Color , Powdered'),
+                    Variations('Medium  , green Color , Powder Free'),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 5),
                       child: Container(
@@ -262,17 +216,29 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       //     ),
                       //   ),
                       // ),
-                      ElegantNumberButton(
-                          color: Colors.deepOrange,
-                          buttonSizeWidth: 30,
-                          buttonSizeHeight: 30,
-                          initialValue: 0,
-                          minValue: 0,
-                          maxValue: 100,
-                          onChanged: (val) async {
-                            setState(() {});
-                          },
-                          decimalPlaces: 0),
+                      // ElegantNumberButton(
+                      //     color: Colors.deepOrange,
+                      //     buttonSizeWidth: 30,
+                      //     buttonSizeHeight: 30,
+                      //     initialValue: 0,
+                      //     minValue: 0,
+                      //     maxValue: 100,
+                      //     onChanged: (val) async {
+                      //       setState(() {});
+                      //     },
+                      //     decimalPlaces: 0),
+                      IconButton(
+                          iconSize: 25,
+                          icon: Icon(
+                            LineIcons.heart,
+                            color: Colors.black87,
+                          ),
+                          onPressed: () {
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (_) => SwipeFeedPage()));
+                          }),
                       Expanded(
                           child: Padding(
                         padding:
@@ -298,6 +264,111 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class Variations extends StatefulWidget {
+
+  String vary;
+
+
+  Variations(this.vary);
+
+  @override
+  _VariationsState createState() => _VariationsState();
+}
+
+class _VariationsState extends State<Variations> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(4),
+      child: Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(),
+              borderRadius: BorderRadius.circular(5)),
+          width: MediaQuery.of(context).size.width,
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(widget.vary),
+                Text(
+                  productList[2]['price'].toString() + ' EGP',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      productList[2]['oldPrice'].toString() + ' EGP',
+                      style: TextStyle(
+                          color: Colors.grey,
+                          decoration: TextDecoration.lineThrough),
+                    ),
+                    Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Container(
+                        decoration:
+                            BoxDecoration(color: darkTeal.withAlpha(40)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            '${((productList[2]['oldPrice'] - productList[2]['price']) / productList[2]['oldPrice'] * 100).round()}% OFF',
+                            style: TextStyle(
+                                color: darkTeal,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Poppins',
+                                fontSize: 14),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    // IconButton(
+                    //     iconSize: 25,
+                    //     icon: Icon(
+                    //       LineIcons.heart,
+                    //       color: Colors.black87,
+                    //     ),
+                    //     onPressed: () {
+                    //       // Navigator.push(
+                    //       //     context,
+                    //       //     MaterialPageRoute(
+                    //       //         builder: (_) => SwipeFeedPage()));
+                    //     }),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Text('Quantity'),
+                      Spacer(),
+                      ElegantNumberButton(
+                          color: Colors.deepOrange,
+                          buttonSizeWidth: 30,
+                          buttonSizeHeight: 30,
+                          initialValue: 0,
+                          minValue: 0,
+                          maxValue: 100,
+                          onChanged: (val) async {
+                            setState(() {});
+                          },
+                          decimalPlaces: 0),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          )),
     );
   }
 }
