@@ -3,6 +3,8 @@ import 'package:dentalstation_app/Designs/auth/Login.dart';
 import 'package:dentalstation_app/Designs/auth/Registration.dart';
 import 'package:dentalstation_app/Designs/auth/ResetPassWord.dart';
 import 'package:dentalstation_app/Designs/auth/authServices.dart';
+import 'package:dentalstation_app/addresses/UserAddresses.dart';
+import 'package:dentalstation_app/addresses/userAddAddress.dart';
 import 'package:flutter/material.dart';
 
 class MyAccount extends StatelessWidget {
@@ -26,6 +28,19 @@ class MyAccount extends StatelessWidget {
               },
               child: Text(
                 'Login',
+                style: TextStyle(color: Colors.teal),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => UserAddresses()));
+              },
+              child: Text(
+                'MyAddress',
                 style: TextStyle(color: Colors.teal),
               ),
             ),
