@@ -2,7 +2,7 @@ import 'package:dentalstation_app/Designs/auth/ChangePassword.dart';
 import 'package:dentalstation_app/Designs/auth/Login.dart';
 import 'package:dentalstation_app/Designs/auth/Registration.dart';
 import 'package:dentalstation_app/Designs/auth/ResetPassWord.dart';
-import 'package:dentalstation_app/Designs/auth/authServices.dart';
+import 'package:dentalstation_app/Services/authServices.dart';
 import 'package:dentalstation_app/addresses/UserAddresses.dart';
 import 'package:dentalstation_app/addresses/userAddAddress.dart';
 import 'package:flutter/material.dart';

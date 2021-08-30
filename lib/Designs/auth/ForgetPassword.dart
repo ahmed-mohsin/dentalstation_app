@@ -1,6 +1,6 @@
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/auth/PinCodeVerificationScreen.dart';
-import 'package:dentalstation_app/Designs/auth/authServices.dart';
+import 'package:dentalstation_app/Services/authServices.dart';
 import 'package:flutter/material.dart';
 
 class ForgePasswordScreen extends StatefulWidget {

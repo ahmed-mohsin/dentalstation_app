@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/HomePage/HomePageScreen.dart';
-import 'package:dentalstation_app/Designs/auth/authServices.dart';
+import 'package:dentalstation_app/Services/authServices.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';

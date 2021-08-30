@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/auth/PinCodeVerificationScreen.dart';
-import 'package:dentalstation_app/Designs/auth/authServices.dart';
+import 'package:dentalstation_app/Services/authServices.dart';
 import 'package:dentalstation_app/constants/baseUrl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
