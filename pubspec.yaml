@@ -44,7 +44,7 @@ dependencies:
   custom_timer: ^0.0.6
   timer_count_down: ^2.2.0
   flip_panel: ^1.0.1
-  vertical_tabs: ^0.2.0
+
   clippy_flutter: ^1.1.1
   dart_random_choice: ^0.0.2
   fcm_config: ^3.0.7

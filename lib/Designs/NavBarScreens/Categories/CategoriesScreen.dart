@@ -4,11 +4,11 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/NavBarScreens/Categories/singleSubCategeroyScreen.dart';
+import 'package:dentalstation_app/Designs/NavBarScreens/Categories/verticalTabs.dart';
 import 'package:dentalstation_app/constants/baseUrl.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:vertical_tabs/vertical_tabs.dart';
-
 
 class Categories extends StatefulWidget {
   @override
@@ -43,7 +43,6 @@ class _CategoriesState extends State<Categories> {
           toastPosition: EasyLoadingToastPosition.bottom);
     }
     if (resMap['code'] == 200) {
-
       for (int i = 0; i < resMap['data'].length; i++) {
         tabs.add(Tab(
           child: Container(
@@ -66,7 +65,8 @@ class _CategoriesState extends State<Categories> {
           color: bac,
           //            itemCount: catList[i]["subCat"].length,
           child: Padding(
-            padding: const EdgeInsets.only(top: 3, left: 2, right: 2, bottom: 4),
+            padding:
+                const EdgeInsets.only(top: 3, left: 2, right: 2, bottom: 4),
             child: ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -89,7 +89,8 @@ class _CategoriesState extends State<Categories> {
                               padding: const EdgeInsets.only(
                                   top: 6, left: 6, right: 6),
                               child: Text(
-                                resMap['data'][i]["primary_category"][index]['name'],
+                                resMap['data'][i]["primary_category"][index]
+                                    ['name'],
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w400,
@@ -101,15 +102,17 @@ class _CategoriesState extends State<Categories> {
                               color: Colors.grey[300],
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 2),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 2),
                               child: GridView.builder(
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
-                                itemCount:
-                                resMap['data'][i]["primary_category"][index]['secondary_category'].length,
+                                itemCount: resMap['data'][i]["primary_category"]
+                                        [index]['secondary_category']
+                                    .length,
                                 gridDelegate:
-                                new SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3),
+                                    new SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 3),
                                 itemBuilder: (BuildContext context, int i2) {
                                   return Padding(
                                     padding: const EdgeInsets.all(2.0),
@@ -119,19 +122,26 @@ class _CategoriesState extends State<Categories> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (_) =>
-                                                    SingleSubCatScreen(resMap['data'][i]["primary_category"][index]['secondary_category'][i2]['name'])));
+                                                    SingleSubCatScreen(resMap[
+                                                                        'data'][i]
+                                                                    [
+                                                                    "primary_category"]
+                                                                [index]
+                                                            [
+                                                            'secondary_category']
+                                                        [i2]['name'])));
                                       },
                                       child: new Container(
                                         decoration: BoxDecoration(
                                             color: bac,
                                             borderRadius:
-                                            BorderRadius.circular(5)),
+                                                BorderRadius.circular(5)),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                              MainAxisAlignment.start,
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                              CrossAxisAlignment.center,
                                           children: [
                                             Expanded(
                                               child: Container(
@@ -139,19 +149,28 @@ class _CategoriesState extends State<Categories> {
                                                 child: CachedNetworkImage(
                                                   height: double.infinity,
                                                   width: double.infinity,
-                                                  imageUrl:resMap['data'][i]["primary_category"][index]['secondary_category'][i2]['image'],
+                                                  imageUrl: resMap['data'][i][
+                                                                  "primary_category"]
+                                                              [index]
+                                                          ['secondary_category']
+                                                      [i2]['image'],
                                                   //placeholder: (context, url) => CircularProgressIndicator(),
                                                   errorWidget:
                                                       (context, url, error) =>
-                                                      Icon(Icons.error),
+                                                          Icon(Icons.error),
                                                   fit: BoxFit.fill,
                                                 ),
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.all(4.0),
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
                                               child: Text(
-                                                resMap['data'][i]["primary_category"][index]['secondary_category'][i2]['name'],
+                                                resMap['data'][i][
+                                                                "primary_category"]
+                                                            [index]
+                                                        ['secondary_category']
+                                                    [i2]['name'],
                                                 style: TextStyle(
                                                   color: darkTeal,
                                                   fontWeight: FontWeight.w400,
@@ -179,9 +198,7 @@ class _CategoriesState extends State<Categories> {
           ),
         ));
       }
-      setState(() {
-
-      });
+      setState(() {});
     }
   }
 
@@ -189,7 +206,6 @@ class _CategoriesState extends State<Categories> {
   void initState() {
     super.initState();
     fetchSideCategories();
-
   }
 
 /* */
@@ -197,24 +213,26 @@ class _CategoriesState extends State<Categories> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: tabs.length == 0?CircularProgressIndicator():Material(color: Colors.red,
-        child: VerticalTabs(
-          tabTextStyle: TextStyle(),
-          tabsShadowColor: Colors.grey[200],
-          indicatorColor: Colors.deepOrange,
-          selectedTabBackgroundColor: bac,
-          backgroundColor: Colors.indigoAccent,
-          tabBackgroundColor: Colors.white,
-          indicatorSide: IndicatorSide.start,
-          // unselectedTabBackgroundColor: Colors.grey[200],
-          indicatorWidth: 5,
-          initialIndex: 0,
-          contentScrollAxis: Axis.vertical,
-          tabsWidth: 120,
-          tabs: tabs,
-          contents: content,
-        ),
-      ),
+      child: tabs.length == 0
+          ? Loader()
+          : Material(
+              child: VerticalTabs(
+                tabTextStyle: TextStyle(),
+                tabsShadowColor: Colors.grey[200],
+                indicatorColor: Colors.deepOrange,
+                selectedTabBackgroundColor: bac,
+                backgroundColor: Colors.indigoAccent,
+                tabBackgroundColor: Colors.white,
+                indicatorSide: IndicatorSide.start,
+                // unselectedTabBackgroundColor: Colors.grey[200],
+                indicatorWidth: 5,
+                initialIndex: 0,
+                contentScrollAxis: Axis.vertical,
+                tabsWidth: 120,
+                tabs: tabs,
+                contents: content,
+              ),
+            ),
     );
   }
 
@@ -240,6 +258,23 @@ class _CategoriesState extends State<Categories> {
         ],
       ),
     );
+  }
+}
+
+class Loader extends StatelessWidget {
+  const Loader({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Center(
+            child: CupertinoActivityIndicator(
+          radius: 30,
+        )));
   }
 }
 
