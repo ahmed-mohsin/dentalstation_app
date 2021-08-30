@@ -4,7 +4,6 @@ import 'package:dentalstation_app/Models/Cart.dart';
 import 'package:dentalstation_app/Models/SecondaryCategoryProducts.dart';
 import 'package:dentalstation_app/State/stateManger.dart';
 import 'package:dentalstation_app/constants/constants.dart';
-import 'package:dentalstation_app/productsjson.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -43,7 +42,7 @@ class itemCard extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (_) => ProductDetailsScreen(
-                            productList[index]['name'], index)));
+                            product.productName, index)));
               },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +65,7 @@ class itemCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 2, right: 2),
                       child: Text(
-                        '${((productList[index]['oldPrice'] - productList[index]['price']) / productList[index]['oldPrice'] * 100).round()}% OFF',
+                        '${product.discountPercentage}% OFF',
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Poppins',
@@ -80,7 +79,7 @@ class itemCard extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 8, right: 8, top: 4, bottom: 2),
                       child: Text(
-                        productList[index]['name'],
+                        product.productName,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: TextStyle(
@@ -95,7 +94,7 @@ class itemCard extends StatelessWidget {
                     padding: const EdgeInsets.only(
                         left: 8, right: 8, top: 2, bottom: 2),
                     child: Text(
-                      productList[index]['oldPrice'].toString() + ' EGP',
+                       'x EGP',
                       style: TextStyle(
                           color: Colors.grey,
                           decoration: TextDecoration.lineThrough),
@@ -105,7 +104,7 @@ class itemCard extends StatelessWidget {
                     padding: const EdgeInsets.only(
                         left: 8, right: 8, top: 2, bottom: 2),
                     child: Text(
-                      productList[index]['price'].toString() + ' EGP',
+                      product.sellPrice + ' EGP',
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 14,
