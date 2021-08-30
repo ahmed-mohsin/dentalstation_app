@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dentalstation_app/Models/Cart.dart';
+import 'package:dentalstation_app/Models/SecondaryCategoryProducts.dart';
 import 'package:dentalstation_app/State/stateManger.dart';
 import 'package:dentalstation_app/constants/constants.dart';
 import 'package:dentalstation_app/productsjson.dart';
@@ -15,8 +16,8 @@ import '../../ProductDetailsScreen.dart';
 
 class itemCard extends StatelessWidget {
   int index;
-
-  itemCard(this.index);
+  Product product ;
+  itemCard(this.index, {this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +49,9 @@ class itemCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
-                    child: Hero(tag:productList[index]['name'] ,
+                    child: Hero(tag:product.productName ,
                       child: CachedNetworkImage(
-                        imageUrl: productList[index]['image'],
+                        imageUrl: product.productImage,
                         //placeholder: (context, url) => CircularProgressIndicator(),
                         errorWidget: (context, url, error) => Icon(Icons.error),
                         height: 95,
