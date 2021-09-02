@@ -50,16 +50,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     if (resMap['code'] == 401) {}
     if (resMap['code'] == 200) {
       /*{"key":"success","data":{"user_phone":"1021888173","code":"1234"},"msg":"","code":200}*/
-    setState(() {
-      loading = false;
-    });
+      setState(() {
+        loading = false;
+      });
       print('ok');
       // Navigator.push(
       //     context, MaterialPageRoute(builder: (context) => MyHomePage()));
     }
     return ProductFullData.fromJson(json.decode(reply));
   }
-   Future<ProductFullData> futureProductData;
+
+  Future<ProductFullData> futureProductData;
 
   @override
   void initState() {
@@ -170,73 +171,86 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                       ),
                     ),
-
                     FutureBuilder<ProductFullData>(
                       future: futureProductData,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return Column(children: [
-                            Variations('Small Size , Red Color , Powder Free'),
-                            Variations('Xlarge , Blue Color , Powdered'),
-                            Variations('Medium  , green Color , Powder Free'),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 5),
-                              child: Container(
+                          return Column(
+                            children: [
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount:
+                                    snapshot.data.data.voucherProducts.length,
+                                itemBuilder: (cx, index) {
+                                  return Variations(snapshot.data.data
+                                      .voucherProducts[index].features,snapshot.data.data
+                                      .voucherProducts[index].sellPrice,snapshot.data.data
+                                      .voucherProducts[index].priceAfterOffer,snapshot.data.data
+                                      .voucherProducts[index].discountPercentage);
+                                },
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5),
+                                child: Container(
+                                  color: Colors.white,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Description',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                        Icon(Icons.arrow_forward_ios)
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
                                 color: Colors.white,
                                 width: MediaQuery.of(context).size.width,
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 6, vertical: 4),
+                                  child: Column(
                                     children: [
-                                      Text(
-                                        'Description',
-                                        style: TextStyle(fontWeight: FontWeight.w500),
+                                      Row(
+                                        children: [
+                                          Text('Brand : '),
+                                          Text('Waldent'),
+                                        ],
                                       ),
-                                      Icon(Icons.arrow_forward_ios)
+                                      Row(
+                                        children: [
+                                          Text('Country of Origin : '),
+                                          Text('Egypt'),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text('Vendor : '),
+                                          Text('Domadent'),
+                                        ],
+                                      ),
                                     ],
                                   ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              color: Colors.white,
-                              width: MediaQuery.of(context).size.width,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 6, vertical: 4),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text('Brand : '),
-                                        Text('Waldent'),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text('Country of Origin : '),
-                                        Text('Egypt'),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text('Vendor : '),
-                                        Text('Domadent'),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-
-                          ],);
+                            ],
+                          );
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }
 
                         // By default, show a loading spinner.
-                        return  Container();
+                        return Container();
                       },
                     ),
                     Padding(
@@ -357,9 +371,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 }
 
 class Variations extends StatefulWidget {
-  String vary;
+  String features, firstPrice, secPrice;
+  var discountValue;
 
-  Variations(this.vary);
+  Variations(this.features, this.firstPrice, this.secPrice, this.discountValue);
 
   @override
   _VariationsState createState() => _VariationsState();
@@ -390,7 +405,7 @@ class _VariationsState extends State<Variations> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.vary),
+                Text(widget.features),
                 Row(
                   children: [
                     Column(
@@ -399,7 +414,7 @@ class _VariationsState extends State<Variations> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          productList[2]['price'].toString() + ' EGP',
+                          '${widget.firstPrice}  EGP',
                           style: TextStyle(
                               color: darkTeal,
                               fontSize: 20,
@@ -409,7 +424,7 @@ class _VariationsState extends State<Variations> {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 4),
                           child: Text(
-                            productList[2]['oldPrice'].toString() + ' EGP',
+                            '${widget.secPrice}  EGP',
                             style: TextStyle(
                                 color: Colors.grey,
                                 decoration: TextDecoration.lineThrough),
@@ -422,7 +437,7 @@ class _VariationsState extends State<Variations> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              '${((productList[2]['oldPrice'] - productList[2]['price']) / productList[2]['oldPrice'] * 100).round()}% OFF',
+                              '${(widget.discountValue.round())} % OFF',
                               style: TextStyle(
                                   color: darkTeal,
                                   fontWeight: FontWeight.w500,

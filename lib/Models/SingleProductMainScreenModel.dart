@@ -92,7 +92,7 @@ class VoucherProduct {
   int id;
   String sellPrice;
   String priceAfterOffer;
-  double discountPercentage;
+  var discountPercentage;
   String features;
 
   factory VoucherProduct.fromJson(Map<String, dynamic> json) => VoucherProduct(
