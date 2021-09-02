@@ -270,11 +270,11 @@ class Loader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Center(
-            child: CupertinoActivityIndicator(
-          radius: 30,
-        )));
+        child: Column(
+          children: [
+            LinearProgressIndicator(minHeight: 6,color: darkTeal,backgroundColor: bac,),
+          ],
+        ));
   }
 }
 
