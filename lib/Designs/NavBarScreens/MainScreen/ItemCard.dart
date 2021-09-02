@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dentalstation_app/Models/Cart.dart';
 import 'package:dentalstation_app/Models/SecondaryCategoryProducts.dart';
+import 'package:dentalstation_app/Models/SingleProductMainScreenModel.dart';
 import 'package:dentalstation_app/State/stateManger.dart';
+import 'package:dentalstation_app/constants/baseUrl.dart';
 import 'package:dentalstation_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,8 +23,8 @@ class itemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final storage = FlutterSecureStorage();
 
+    final storage = FlutterSecureStorage();
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Container(
