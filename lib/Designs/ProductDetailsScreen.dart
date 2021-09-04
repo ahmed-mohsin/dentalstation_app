@@ -9,6 +9,7 @@ import 'package:dentalstation_app/Models/SingleProductMainScreenModel.dart';
 import 'package:dentalstation_app/constants/baseUrl.dart';
 import 'package:dentalstation_app/productsjson.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:line_icons/line_icon.dart';
 
 // import 'package:flutter_elegant_number_button/flutter_elegant_number_button.dart';
@@ -28,7 +29,7 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  int q;
+  // int q;
   bool loading;
 
   Future<ProductFullData> getProductFullData() async {
@@ -183,11 +184,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 itemCount:
                                     snapshot.data.data.voucherProducts.length,
                                 itemBuilder: (cx, index) {
-                                  return Variations(snapshot.data.data
-                                      .voucherProducts[index].features,snapshot.data.data
-                                      .voucherProducts[index].sellPrice,snapshot.data.data
-                                      .voucherProducts[index].priceAfterOffer,snapshot.data.data
-                                      .voucherProducts[index].discountPercentage);
+                                  return Variations(
+                                      snapshot.data.data.voucherProducts[index]
+                                          .features,
+                                      snapshot.data.data.voucherProducts[index]
+                                          .sellPrice,
+                                      snapshot.data.data.voucherProducts[index]
+                                          .priceAfterOffer,
+                                      snapshot.data.data.voucherProducts[index]
+                                          .discountPercentage,
+                                      snapshot
+                                          .data.data.voucherProducts[index].id
+                                          .toString());
                                 },
                               ),
                               Padding(
@@ -246,7 +254,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ],
                           );
                         } else if (snapshot.hasError) {
-                          return Text('${snapshot.error}');
+                          return Text(
+                              'Connection error Please Check Your internet Connection');
                         }
 
                         // By default, show a loading spinner.
@@ -371,10 +380,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 }
 
 class Variations extends StatefulWidget {
-  String features, firstPrice, secPrice;
+  String features, firstPrice, secPrice, vId;
   var discountValue;
 
-  Variations(this.features, this.firstPrice, this.secPrice, this.discountValue);
+  Variations(this.features, this.firstPrice, this.secPrice, this.discountValue,
+      this.vId);
 
   @override
   _VariationsState createState() => _VariationsState();
@@ -383,11 +393,52 @@ class Variations extends StatefulWidget {
 class _VariationsState extends State<Variations> {
   final RoundedLoadingButtonController _btnController2 =
       RoundedLoadingButtonController();
+  int quantity;
 
-  void _doSomething(RoundedLoadingButtonController controller) async {
-    Timer(Duration(seconds: 3), () {
-      controller.success();
-    });
+  @override
+  void initState() {
+    super.initState();
+    quantity = 0;
+  }
+
+  void _doSomething(
+      RoundedLoadingButtonController controller, String vID, quantity) async {
+    String serviceUrl = baseUrl + 'addToCart';
+    HttpClient httpClient = new HttpClient();
+    if (quantity > 0) {
+      print('tosh');
+      HttpClientRequest request =
+          await httpClient.postUrl(Uri.parse(serviceUrl));
+      request.headers.set('content-type', 'application/json');
+      request.headers.set('Authorization',
+          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGVudGFsc3RhdGlvbi5uZXRcL2FwaVwvc2lnbl9pbiIsImlhdCI6MTYzMDI1OTEwMywiZXhwIjoxMDk2MTQ1OTEwMywibmJmIjoxNjMwMjU5MTAzLCJqdGkiOiJWN3JsQ0xkUWtwRnoybXQ3Iiwic3ViIjoyLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.skLFhyAb4QysG8BafVtElLV0057e1ix-Ceyw8xSJeeg');
+      request.add(utf8.encode(
+          json.encode({'voucher_product_id': vID, 'quantity': quantity})));
+      HttpClientResponse response = await request.close();
+      String reply = await response.transform(utf8.decoder).join();
+      print(reply);
+      httpClient.close();
+      Map<String, dynamic> resMap = json.decode(reply);
+      print(resMap['msg'].toString());
+      print(resMap['code']);
+      if (resMap['code'] == 401) {
+        controller.error();
+      }
+      if (resMap['code'] == 200) {
+        /*{"key":"success","data":{"user_phone":"1021888173","code":"1234"},"msg":"","code":200}*/
+
+        controller.success();
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => MyHomePage()));
+      }
+      // Timer(Duration(seconds: 3), () {
+      //   controller.success();
+      // });
+    } else {
+      controller.reset();
+      EasyLoading.showToast('اختر كمية صحيحة اكبر من 0',
+          toastPosition: EasyLoadingToastPosition.bottom);
+    }
   }
 
   @override
@@ -454,14 +505,22 @@ class _VariationsState extends State<Variations> {
                       child: Column(
                         children: [
                           ElegantNumberButton(
+                              step: 1,
                               color: Colors.deepOrange,
                               buttonSizeWidth: 30,
                               buttonSizeHeight: 40,
-                              initialValue: 0,
+                              initialValue: quantity,
                               minValue: 0,
                               maxValue: 100,
+                              textStyle: TextStyle(
+                                  color: darkTeal,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w700),
                               onChanged: (val) async {
-                                setState(() {});
+                                setState(() {
+                                  quantity = val;
+                                });
+                                print(quantity);
                               },
                               decimalPlaces: 0),
                           RoundedLoadingButton(
@@ -470,13 +529,17 @@ class _VariationsState extends State<Variations> {
                             color: Colors.deepOrange,
                             successColor: Colors.deepOrange,
                             controller: _btnController2,
-                            onPressed: () => _doSomething(_btnController2),
+                            onPressed: () => _doSomething(
+                                _btnController2, widget.vId, quantity),
                             valueColor: Colors.white,
                             borderRadius: 10,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 6, right: 6),
                               child: Text('Add To Cart',
-                                  style: TextStyle(color: Colors.white)),
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'Poppins',
+                                  )),
                             ),
                           ),
                         ],
