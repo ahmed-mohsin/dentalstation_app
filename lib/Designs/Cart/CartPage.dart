@@ -170,7 +170,7 @@ class _CartPageState extends State<CartPage> {
                                   child: Container(height: 50,
                                     width:
                                         MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(color:darkTeal,borderRadius: ),
+                                    decoration: BoxDecoration(color:darkTeal,borderRadius:BorderRadius.circular(5) ),
                                     child: Center(
                                         child: Text(
                                       'CHECKOUT',
