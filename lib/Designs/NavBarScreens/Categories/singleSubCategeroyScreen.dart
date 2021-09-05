@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dentalstation_app/Designs/Decorations/ModifiedGridView.dart';
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
+import 'package:dentalstation_app/Designs/HomePage/HomePageScreen.dart';
 import 'package:dentalstation_app/Designs/NavBarScreens/Categories/CategoriesScreen.dart';
 import 'package:dentalstation_app/Designs/NavBarScreens/MainScreen/ItemCard.dart';
 import 'package:dentalstation_app/Models/SecondaryCategoryProducts.dart';
@@ -28,6 +29,11 @@ class _SingleSubCatScreenState extends State<SingleSubCatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          Container(
+            //decoration: BoxDecoration(color: xx, shape: BoxShape.circle),
+              child: CartLogo())
+        ],
         backgroundColor: darkTeal,
         title: Text(widget.subCatName),
         centerTitle: true,

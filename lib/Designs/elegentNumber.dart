@@ -1,3 +1,4 @@
+import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:flutter/material.dart';
 
 typedef void CounterChangeCallback(num value);
@@ -98,7 +99,8 @@ class ElegantNumberButton extends StatelessWidget {
                 '${num.parse((selectedValue).toStringAsFixed(decimalPlaces))}',
                 style: textStyle == null
                     ? textStyle
-                    : new TextStyle(
+                    : new TextStyle(color: darkTeal,fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w700,
                   fontSize: 20.0,
                 )),
           ),

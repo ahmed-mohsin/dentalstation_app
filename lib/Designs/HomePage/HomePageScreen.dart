@@ -119,34 +119,7 @@ class _MyHomePageState extends State<MyHomePage>
           actions: [
             Container(
                 //decoration: BoxDecoration(color: xx, shape: BoxShape.circle),
-                child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Consumer(
-                builder: (cx, watch, v) {
-                  return Badge(
-                    child: IconButton(
-                        icon: Icon(LineIcons.shoppingCart),
-                        onPressed: () {
-                          //CartPage
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => CartPage()),
-                          );
-                        }),
-                    position: BadgePosition(top: 0, end: 1),
-                    animationDuration: (Duration(milliseconds: 500)),
-                    animationType: BadgeAnimationType.scale,
-                    showBadge: true,
-                    badgeContent: Text(
-                      '${watch(cartListProvider.state).length}',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                    badgeColor: Colors.pink,
-                  );
-                },
-              ),
-            ))
+                child: CartLogo())
           ],
           title: Text(
             "Dental Station",
@@ -204,3 +177,47 @@ class _MyHomePageState extends State<MyHomePage>
   }
 }
 
+class CartLogo extends StatelessWidget {
+  const CartLogo({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Consumer(
+        builder: (cx, watch, v) {
+          return InkWell(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (cx) {
+                return CartPage();
+              }));
+            },
+            child: Badge(
+              child: IconButton(
+                  icon: Icon(LineIcons.shoppingCart),
+                  onPressed: () {
+                    //CartPage
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CartPage()),
+                    );
+                  }),
+              position: BadgePosition(top: 0, end: 1),
+              animationDuration: (Duration(milliseconds: 500)),
+              animationType: BadgeAnimationType.scale,
+              showBadge: true,
+              badgeContent: Text(
+                '${watch(cartListProvider.state).length}',
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+              badgeColor: Colors.pink,
+            ),
+          );
+        },
+      ),
+    );
+  }
+}

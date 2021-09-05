@@ -16,6 +16,7 @@ import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
+import 'HomePage/HomePageScreen.dart';
 import 'elegentNumber.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
@@ -75,6 +76,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          Container(
+            //decoration: BoxDecoration(color: xx, shape: BoxShape.circle),
+              child: CartLogo())
+        ],
         backgroundColor: darkTeal,
         centerTitle: true,
         title: Text(
