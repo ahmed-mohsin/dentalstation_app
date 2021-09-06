@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dentalstation_app/Designs/CHECKOUT.dart';
+import 'package:dentalstation_app/Designs/Cart/CHECKOUT.dart';
 import 'package:dentalstation_app/Designs/Decorations/hex.dart';
 import 'package:dentalstation_app/Designs/NavBarScreens/Categories/CategoriesScreen.dart';
 import 'package:dentalstation_app/Models/Cart.dart';
