@@ -8,8 +8,13 @@ import 'package:dentalstation_app/Models/Cart.dart';
 import 'package:dentalstation_app/Models/MyAddresses.dart';
 import 'package:dentalstation_app/constants/baseUrl.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class CHECKOUT extends StatefulWidget {
+  String orderId;
+
+  CHECKOUT(this.orderId);
+
   @override
   _CHECKOUTState createState() => _CHECKOUTState();
 }
@@ -265,16 +270,20 @@ class _CHECKOUTState extends State<CHECKOUT> {
                             child: InkWell(
                               onTap: () async {
                                 String serviceUrl = baseUrl + 'checkoutOrder';
+                                //    EasyLoading.show(status: 'loading...');
                                 HttpClient httpClient = new HttpClient();
                                 HttpClientRequest request = await httpClient
                                     .postUrl(Uri.parse(serviceUrl));
-                                request.add(utf8.encode(json.encode({
-                                  'order_id': "1",
-                                  'address_id': '1',
-                                })));
-                                //request.headers.set('content-type', 'application/json');
+                                request.headers
+                                    .set('content-type', 'application/json');
                                 request.headers.set('Authorization',
                                     'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGVudGFsc3RhdGlvbi5uZXRcL2FwaVwvc2lnbl9pbiIsImlhdCI6MTYzMDI1OTEwMywiZXhwIjoxMDk2MTQ1OTEwMywibmJmIjoxNjMwMjU5MTAzLCJqdGkiOiJWN3JsQ0xkUWtwRnoybXQ3Iiwic3ViIjoyLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.skLFhyAb4QysG8BafVtElLV0057e1ix-Ceyw8xSJeeg');
+
+                                request.add(utf8.encode(json.encode({
+                                  'order_id': widget.orderId,
+                                  'address_id': '4',
+                                })));
+
                                 HttpClientResponse response =
                                     await request.close();
                                 String reply = await response
@@ -285,19 +294,29 @@ class _CHECKOUTState extends State<CHECKOUT> {
                                 Map<String, dynamic> resMap =
                                     json.decode(reply);
                                 print(resMap['msg'].toString());
-                                if (resMap['code'] == 401) {}
+                                if (resMap['code'] == 401) {
+                                  EasyLoading.showToast(
+                                      resMap['msg'].toString(),
+                                      toastPosition:
+                                          EasyLoadingToastPosition.bottom);
+                                }
                                 if (resMap['code'] == 200) {
                                   /*{"key":"success","data":{"user_phone":"1021888173","code":"1234"},"msg":"","code":200}*/
-                                  setState(() {
-                                    loading = false;
-                                  });
-                                  print('ok');
+
+                                  EasyLoading.showToast('تم الطلب بنجاح',
+                                      toastPosition:
+                                          EasyLoadingToastPosition.bottom);
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (cx) {
+                                    return Congratulation();
+                                  }));
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => MyHomePage()));
                                   // Navigator.push(
                                   //     context, MaterialPageRoute(builder: (context) => MyHomePage()));
                                 }
-                                // Navigator.push(context, MaterialPageRoute(builder: (cx){
-                                //   return Congratulation();
-                                // }));
                               },
                               child: Container(
                                 height: 60,
@@ -383,25 +402,27 @@ class AddressOptionsState extends State<AddressOptions> {
       future: futureAddressesData,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return snapshot.data.data.length == 0 ? Padding(
-            padding: const EdgeInsets.only(left: 2, right: 2),
-            child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 70,
-                child: Center(child: Text('Add New Address First'))),
-          ):ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return RadioListTile(
-                value: index,
-                groupValue: value,
-                onChanged: (ind) => setState(() => value = ind),
-                title: Text(snapshot.data.data[index].title),
-              );
-            },
-            itemCount: snapshot.data.data.length,
-          );
+          return snapshot.data.data.length == 0
+              ? Padding(
+                  padding: const EdgeInsets.only(left: 2, right: 2),
+                  child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 70,
+                      child: Center(child: Text('Add New Address First'))),
+                )
+              : ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return RadioListTile(
+                      value: index,
+                      groupValue: value,
+                      onChanged: (ind) => setState(() => value = ind),
+                      title: Text(snapshot.data.data[index].title),
+                    );
+                  },
+                  itemCount: snapshot.data.data.length,
+                );
         } else if (snapshot.hasError) {
           return Text('Connection error Please Check Your internet Connection');
         }

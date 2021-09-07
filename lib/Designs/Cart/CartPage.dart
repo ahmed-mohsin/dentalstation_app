@@ -73,7 +73,9 @@ class _CartPageState extends State<CartPage> {
                 future: futureProductData,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return Stack(
+                    return snapshot.data.data.length == 0
+                        ? Text('empty cart')
+                        : Stack(
                       children: [
                         Container(
                           height: MediaQuery.of(context).size.height,
@@ -82,20 +84,20 @@ class _CartPageState extends State<CartPage> {
                               children: [
                                 loading == true
                                     ? LinearProgressIndicator(
-                                  minHeight: 6,
-                                  color: darkTeal,
-                                  backgroundColor: bac,
-                                )
+                                        minHeight: 6,
+                                        color: darkTeal,
+                                        backgroundColor: bac,
+                                      )
                                     : Container(),
                                 ListView.builder(
-                                    physics: NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount: snapshot
-                                        .data.data[0].orderProducts.length,
-                                    itemBuilder: (cx, i) {
-                                      return CartElementWidget(snapshot
-                                          .data.data[0].orderProducts[i]);
-                                    }),
+                                        physics: NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount: snapshot
+                                            .data.data[0].orderProducts.length,
+                                        itemBuilder: (cx, i) {
+                                          return CartElementWidget(snapshot
+                                              .data.data[0].orderProducts[i]);
+                                        }),
                                 Divider(
                                   thickness: 3,
                                 ),
@@ -161,23 +163,26 @@ class _CartPageState extends State<CartPage> {
                                   Padding(
                                     padding: const EdgeInsets.all(4.0),
                                     child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (c) {
-                                      return CHECKOUT();
-                                    }));
-                                  },
-                                  child: Container(height: 50,
-                                    width:
-                                        MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(color:darkTeal,borderRadius:BorderRadius.circular(5) ),
-                                    child: Center(
-                                        child: Text(
-                                      'CHECKOUT',
-                                      style:
-                                          TextStyle(color: Colors.white),
-                                    )),
-                                  ),
+                                      onTap: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(builder: (c) {
+                                          return CHECKOUT(snapshot.data.data[0].id.toString());
+                                        }));
+                                      },
+                                      child: Container(
+                                        height: 50,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                            color: darkTeal,
+                                            borderRadius:
+                                                BorderRadius.circular(5)),
+                                        child: Center(
+                                            child: Text(
+                                          'CHECKOUT',
+                                          style: TextStyle(color: Colors.white),
+                                        )),
+                                      ),
                                     ),
                                   )
                                 ],
@@ -254,7 +259,6 @@ class _CartElementWidgetState extends State<CartElementWidget> {
                         fontStyle: FontStyle.italic,
                         fontSize: 12),
                   ),
-
                 ],
               ),
               Spacer(),
@@ -262,9 +266,13 @@ class _CartElementWidgetState extends State<CartElementWidget> {
                 children: [
                   q != int.parse(widget.product.quantity)
                       ? Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(widget.product.quantity,style: TextStyle(color: Colors.orange,fontSize: 12),),
-                      )
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            widget.product.quantity,
+                            style:
+                                TextStyle(color: Colors.orange, fontSize: 12),
+                          ),
+                        )
                       : Container(),
                   ElegantNumberButton(
                       step: 1,
@@ -281,13 +289,17 @@ class _CartElementWidgetState extends State<CartElementWidget> {
                       decimalPlaces: 0),
                   q != int.parse(widget.product.quantity)
                       ? Container(
-                      decoration: BoxDecoration(
-                          color: Colors.deepOrange,
-                          borderRadius: BorderRadius.circular(8)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text("Update Quantity",style: TextStyle(color: Colors.white,fontSize: 10),),
-                      ))
+                          decoration: BoxDecoration(
+                              color: Colors.deepOrange,
+                              borderRadius: BorderRadius.circular(8)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "Update Quantity",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 10),
+                            ),
+                          ))
                       : Container()
                 ],
               )
