@@ -45,7 +45,7 @@ class itemCard extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (_) => ProductDetailsScreen(
-                            product.productName, index)));
+                            product.productName,product.productImage,product.productId.toString(), index)));
               },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +68,9 @@ class itemCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 2, right: 2),
                       child: Text(
-                        '${product.discountPercentage}% OFF',
+                        //'${product.discountPercentage}% OFF',
+                        '${product.id}% OFF',
+
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Poppins',

@@ -21,9 +21,11 @@ import 'elegentNumber.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   String productName;
+  String productId ;
   int index;
+  String imgUrl ;
 
-  ProductDetailsScreen(this.productName, this.index);
+  ProductDetailsScreen(this.productName,this.imgUrl, this.productId,this.index);
 
   @override
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
@@ -41,7 +43,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     request.headers.set('Authorization',
         'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGVudGFsc3RhdGlvbi5uZXRcL2FwaVwvc2lnbl9pbiIsImlhdCI6MTYzMDI1OTEwMywiZXhwIjoxMDk2MTQ1OTEwMywibmJmIjoxNjMwMjU5MTAzLCJqdGkiOiJWN3JsQ0xkUWtwRnoybXQ3Iiwic3ViIjoyLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.skLFhyAb4QysG8BafVtElLV0057e1ix-Ceyw8xSJeeg');
     request.add(utf8.encode(json.encode({
-      'product_id': 5,
+      'product_id': widget.productId,
     })));
     HttpClientResponse response = await request.close();
     String reply = await response.transform(utf8.decoder).join();
@@ -130,7 +132,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   ),
                                 ),
                                 CachedNetworkImage(
-                                  imageUrl: productList[widget.index]['image'],
+                                  imageUrl: widget.imgUrl,
                                   //placeholder: (context, url) => CircularProgressIndicator(),
                                   errorWidget: (context, url, error) =>
                                       Icon(Icons.error),
@@ -184,7 +186,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         if (snapshot.hasData) {
                           return Column(
                             children: [
-                              ListView.builder(
+                              snapshot.data.data.voucherProducts.length==null?Container():ListView.builder(
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 itemCount:

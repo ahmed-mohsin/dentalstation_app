@@ -33,11 +33,11 @@ class _SwipperSectionState extends State<SwipperSection> {
             return InkWell(
               onTap: () {
                 print('clicked');
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => ProductDetailsScreen(
-                            productList[index]['name'], index)));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (_) => ProductDetailsScreen(
+                //             productList[index]['name'], index)));
               },
               child: Card(
                 child: Stack(
