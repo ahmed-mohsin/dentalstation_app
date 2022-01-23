@@ -31,7 +31,7 @@ class _CategoriesState extends State<Categories> {
     HttpClientRequest request = await httpClient.getUrl(Uri.parse(serviceUrl));
     request.headers.set('content-type', 'application/json');
     request.headers.set('Authorization',
-        'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGVudGFsc3RhdGlvbi5uZXRcL2FwaVwvc2lnbl9pbiIsImlhdCI6MTYzMDI1OTEwMywiZXhwIjoxMDk2MTQ1OTEwMywibmJmIjoxNjMwMjU5MTAzLCJqdGkiOiJWN3JsQ0xkUWtwRnoybXQ3Iiwic3ViIjoyLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.skLFhyAb4QysG8BafVtElLV0057e1ix-Ceyw8xSJeeg');
+        'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGVudGFsc3RhdGlvbi5uZXRcL2FwaVwvdXNlcl9hY3RpdmF0aW9uIiwiaWF0IjoxNjQyOTU2OTc1LCJleHAiOjEwOTc0MTU2OTc1LCJuYmYiOjE2NDI5NTY5NzUsImp0aSI6InZJMXEzNlNkTUZ3QmhkcjkiLCJzdWIiOjMsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.7uOQmeT4FmMOOvueQ81AO6bS0W2DkoOOA3uoOcGkZbQ');
     HttpClientResponse response = await request.close();
     String reply = await response.transform(utf8.decoder).join();
     print(reply);

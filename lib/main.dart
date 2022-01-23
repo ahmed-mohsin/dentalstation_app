@@ -24,9 +24,9 @@ Future<void> main() async {
   }, (error, stackTrace) {
     FirebaseCrashlytics.instance.recordError(error, stackTrace);
   });
-  FCMConfig.messaging.getToken().then((token) {
-    print(token);
-  });
+  // FCMConfig.instance.getToken().then((token) {
+  //   print(token);
+  // });
 }
 
 FirebaseAnalytics analytics = FirebaseAnalytics();

@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -53,13 +54,13 @@ class _MyHomePageState extends State<MyHomePage>
   final iconList = <IconData>[
     LineIcons.home,
     Icons.format_list_bulleted_sharp,
-    Icons.local_offer,
+    FluentIcons.cart_24_regular,
     Icons.account_circle_outlined,
   ];
   final tabString = <String>[
     'MainScreen',
     'Categories',
-    'Deals',
+    'Cart',
     'MyAccount',
   ];
   final homePageWidgets = <Widget>[
@@ -141,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage>
               children: [
                 Icon(
                   iconList[index],
-                  size: 20,
+                  size: 25,
                   color: color,
                 ),
                 const SizedBox(height: 4),
